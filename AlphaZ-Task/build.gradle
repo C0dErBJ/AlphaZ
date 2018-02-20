@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    compile project(':Core')
+    compile project(':AlphaZ-Core')
     compile(
             "org.springframework:spring-context-support:$springVersion",
 //            "org.quartz-scheduler:quartz:2.3.0",

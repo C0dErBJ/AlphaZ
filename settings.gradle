@@ -1,4 +1,4 @@
 rootProject.name = 'alphaz'
-include "Api", "Core", "Task", "Util", "plugin:Oauth", "plugin:Flow"
+include "AlphaZ-Api", "AlphaZ-Core", "AlphaZ-Task", "AlphaZ-Util", "plugin:Oauth", "plugin:Flow"
 
-include "App"
+include "AlphaZ-App"

@@ -18,7 +18,7 @@ bootRepackage {
     mainClass = 'com.alphaz.api.Application'
 }
 dependencies {
-    compile project(':Core')
+    compile project(':AlphaZ-Core')
 //    compile project(':plugin/oauth')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf",

@@ -15,7 +15,7 @@ bootRepackage {
     enabled = false
 }
 dependencies {
-    compile project(':Core')
+    compile project(':AlphaZ-Core')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile(
             "org.apache.shiro:shiro-core:${shiroVersion}",
