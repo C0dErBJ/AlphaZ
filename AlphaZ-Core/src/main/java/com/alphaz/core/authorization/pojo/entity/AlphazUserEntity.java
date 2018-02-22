@@ -36,9 +36,12 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
+    private String grantType;
+    private String scope;
+    private String redirectUri;
+
 
     @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -48,7 +51,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -58,7 +60,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -68,7 +69,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -78,7 +78,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "birthday")
     public Timestamp getBirthday() {
         return birthday;
     }
@@ -88,7 +87,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
@@ -98,7 +96,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "qq")
     public String getQq() {
         return qq;
     }
@@ -108,7 +105,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "weibo")
     public String getWeibo() {
         return weibo;
     }
@@ -118,7 +114,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "wechat")
     public String getWechat() {
         return wechat;
     }
@@ -129,7 +124,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
 
 
     @Basic
-    @Column(name = "avatar")
     public Long getAvatar() {
         return avatar;
     }
@@ -140,7 +134,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
 
 
     @Basic
-    @Column(name = "note")
     public String getNote() {
         return note;
     }
@@ -156,7 +149,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
     }
 
     @Basic
-    @Column(name = "password")
     @Override
     public String getPassword() {
         return password;
@@ -168,7 +160,6 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
 
 
     @Basic
-    @Column(name = "username")
     @Override
     public String getUsername() {
         return username;
@@ -176,27 +167,28 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
 
     @Override
     @Basic
-    @Column(name = "isaccountnonexpired")
+    @Column(columnDefinition = "tinyint default 1",length = 1)
     public boolean isAccountNonExpired() {
-        return false;
+        return isAccountNonExpired;
     }
 
     @Override
     @Basic
-    @Column(name = "isaccountnonlocked")
+    @Column(columnDefinition = "tinyint default 1",length = 1)
     public boolean isAccountNonLocked() {
-        return false;
+        return isAccountNonLocked;
     }
 
     @Override
     @Basic
-    @Column(name = "iscredentialsnonexpired")
+    @Column(columnDefinition = "tinyint default 1",length = 1)
     public boolean isCredentialsNonExpired() {
-        return false;
+        return isCredentialsNonExpired;
     }
+
     @Basic
-    @Column(name = "isenabled")
     @Override
+    @Column(columnDefinition = "tinyint default 1",length = 1)
     public boolean isEnabled() {
         return isEnabled;
     }
@@ -220,5 +212,33 @@ public class AlphazUserEntity extends BaseDO implements UserDetails {
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Basic
+    @Column(name = "grant_type", columnDefinition = "varchar(70) default 'client_credentials,password,authorization_code,refresh_token'")
+    public String getGrantType() {
+        return grantType;
+    }
+
+    public void setGrantType(String grantType) {
+        this.grantType = grantType;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    @Basic
+    @Column(name = "redirect_uri", columnDefinition = "varchar(300) default 'http://localhost'")
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    public void setRedirectUri(String redirectUri) {
+        this.redirectUri = redirectUri;
     }
 }

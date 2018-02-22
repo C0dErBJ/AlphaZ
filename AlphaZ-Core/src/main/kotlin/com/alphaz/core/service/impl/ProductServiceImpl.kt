@@ -1,6 +1,5 @@
 package com.alphaz.core.service.impl
 
-import com.alphaz.core.pojo.entity.QTbFieldEntity
 import com.alphaz.core.pojo.entity.QTbProductEntity
 import com.alphaz.core.pojo.entity.TbProductEntity
 import com.alphaz.core.pojo.viewmodel.DataTableModel
@@ -11,6 +10,7 @@ import com.alphaz.core.pojo.viewmodel.product.ProductModel
 import com.alphaz.core.pojo.viewmodel.product.TemplateViewModel
 import com.alphaz.core.constant.DataState
 import com.alphaz.core.dao.ProductDAO
+import com.alphaz.core.pojo.entity.QTbFieldEntity
 import com.alphaz.core.service.ProductService
 import com.querydsl.core.BooleanBuilder
 import org.springframework.stereotype.Service

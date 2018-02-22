@@ -63,7 +63,7 @@
 
         <!-- /.social-auth-links -->
 
-        <a href="javascript:;">忘记密码，请联系管理员</a><br/>
+        <a href="javascript:;" id="abc">忘记密码，请联系管理员</a><br/>
 
     </div>
     <!-- /.login-box-body -->
@@ -142,11 +142,11 @@
             var password = $("#password").val();
             var remember = $("input[type='checkbox']").is(':checked')
             $.ajax({
-                url: "user/login",
+                url: "login",
                 data: {
                     "username": name,
                     "password": password,
-                    "remember": remember
+                    "remember-me": remember
                 },
                 type: "post",
                 dataType: "json",
@@ -165,6 +165,16 @@
         }
     });
 
+    $("#abc").click(function () {
+        $.ajax({
+            url: "oauth/authorize?grant_type=password&response_type=token&username=trusted&password=secret",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                $("#abc").html(data)
+            }
+        });
+    })
     /*]]>*/
 </script>
 

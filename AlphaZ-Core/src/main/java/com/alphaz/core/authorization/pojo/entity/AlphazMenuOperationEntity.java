@@ -21,7 +21,6 @@ public class AlphazMenuOperationEntity extends BaseDO {
 
 
     @Basic
-    @Column(name = "menuid")
     public Long getMenuid() {
         return menuid;
     }
@@ -31,7 +30,6 @@ public class AlphazMenuOperationEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "operationid")
     public Long getOperationid() {
         return operationid;
     }

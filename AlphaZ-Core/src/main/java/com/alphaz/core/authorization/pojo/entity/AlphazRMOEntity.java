@@ -22,7 +22,6 @@ public class AlphazRMOEntity extends BaseDO {
 
 
     @Basic
-    @Column(name = "rid")
     public Long getRid() {
         return rid;
     }
@@ -32,7 +31,6 @@ public class AlphazRMOEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "moid")
     public Long getMoid() {
         return moid;
     }

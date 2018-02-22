@@ -1,10 +1,8 @@
 package com.alphaz.core.authorization.pojo.entity;
 
-import com.alphaz.core.constant.DataState;
 import com.alphaz.core.pojo.entity.BaseDO;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * ProjectName: alphaz
@@ -17,15 +15,14 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "alphaz_role", schema = "alphaz", catalog = "")
 public class AlphazRoleEntity extends BaseDO {
-    private String rolename;
+    private String roleName;
     private String label;
-    private String privilgelevel;
+    private String permissionLevel;
     private String description;
     private Integer sort;
-    private boolean iseditable;
+    private boolean isEditable;
 
     @Basic
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -35,18 +32,16 @@ public class AlphazRoleEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "iseditable")
-    public boolean getIseditable() {
-        return iseditable;
+    public boolean getEditable() {
+        return isEditable;
     }
 
-    public void setIseditable(boolean iseditable) {
-        this.iseditable = iseditable;
+    public void setEditable(boolean editable) {
+        this.isEditable = editable;
     }
 
 
     @Basic
-    @Column(name = "sort")
     public Integer getSort() {
         return sort;
     }
@@ -56,17 +51,15 @@ public class AlphazRoleEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "rolename")
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Basic
-    @Column(name = "label")
     public String getLabel() {
         return label;
     }
@@ -76,13 +69,12 @@ public class AlphazRoleEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "privilgelevel")
-    public String getPrivilgelevel() {
-        return privilgelevel;
+    public String getPermissionLevel() {
+        return permissionLevel;
     }
 
-    public void setPrivilgelevel(String privilgelevel) {
-        this.privilgelevel = privilgelevel;
+    public void setPermissionLevel(String permissionLevel) {
+        this.permissionLevel = permissionLevel;
     }
 
 

@@ -18,8 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService {
 
-    ResponseModel<UserViewModel> login(String username, String password);
-
     ResponseModel addUser(UserModel model);
 
     ResponseModel deleteUser(Long userid);

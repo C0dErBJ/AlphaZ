@@ -20,7 +20,6 @@ public class AlphazUserRoleEntity extends BaseDO {
     private Long roleid;
 
     @Basic
-    @Column(name = "userid")
 
     public Long getUserid() {
         return userid;
@@ -31,7 +30,6 @@ public class AlphazUserRoleEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "roleid")
     public Long getRoleid() {
         return roleid;
     }

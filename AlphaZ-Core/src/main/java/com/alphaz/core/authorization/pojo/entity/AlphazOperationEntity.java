@@ -3,7 +3,6 @@ package com.alphaz.core.authorization.pojo.entity;
 import com.alphaz.core.pojo.entity.BaseDO;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * ProjectName: alphaz
@@ -16,7 +15,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "alphaz_operation", schema = "alphaz", catalog = "")
 public class AlphazOperationEntity extends BaseDO {
-    private String operationname;
+    private String operationName;
     private String label;
     private Integer sort;
     private String icon;
@@ -44,13 +43,12 @@ public class AlphazOperationEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "operationname")
-    public String getOperationname() {
-        return operationname;
+    public String getOperationName() {
+        return operationName;
     }
 
-    public void setOperationname(String operationname) {
-        this.operationname = operationname;
+    public void setOperationName(String operationName) {
+        this.operationName = operationName;
     }
 
     @Basic

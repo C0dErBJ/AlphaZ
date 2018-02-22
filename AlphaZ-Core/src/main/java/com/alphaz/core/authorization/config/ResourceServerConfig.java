@@ -26,18 +26,18 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: 上午10:02 2018/2/6
  * @Description:
  */
-@Configuration
-@EnableResourceServer
+//@Configuration
+//@EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Value("${resource.id:spring-boot-application}")
     private String resourceId;
-    @Value("${security.oauth2.resource.jwt.private-key}")
-    private String privateKey;
+//    @Value("${security.oauth2.resource.jwt.private-key}")
+//    private String privateKey;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer config) {
-        config.tokenServices(tokenServices());
+        config.tokenServices(tokenServices()).resourceId(resourceId).stateless(false);
     }
 
     @Bean
@@ -48,7 +48,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(privateKey);
+//        converter.setSigningKey(privateKey);
         return converter;
     }
 

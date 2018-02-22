@@ -9,9 +9,17 @@ import com.alphaz.core.pojo.viewmodel.user.LoginModel;
 import com.alphaz.core.pojo.viewmodel.user.UserModel;
 import com.alphaz.core.pojo.viewmodel.user.UserUpdateModel;
 import com.alphaz.core.pojo.viewmodel.user.UserViewModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -25,38 +33,6 @@ public class UserController {
     UserService userService;
     @Resource
     PrivilegeService privilegeService;
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public ResponseModel login(LoginModel model, HttpServletResponse response) {
-//        if (model.getRemember()) {
-//            String namepassword = model.getUsername().concat("|%|#|").concat(model.getPassword());
-//            String namepassword64 = null;
-//            try {
-//                namepassword64 = Base64.getEncoder().encodeToString(namepassword.getBytes("utf-8"));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//            Cookie cookie = new Cookie("a&p", namepassword64);
-//            cookie.setPath("/");
-//            cookie.setMaxAge(60 * 60 * 24 * 30);
-//
-//            response.addCookie(cookie);
-//        }
-//        if (!model.getRemember()) {
-//            Cookie cookie = new Cookie("a&p", null);
-//            cookie.setPath("/");
-//            cookie.setMaxAge(0);
-//            response.addCookie(cookie);
-//        }
-        ResponseModel<UserViewModel> resultModel = userService.login(model.getUsername(), model.getPassword());
-        if (resultModel.state == DataState.Ava) {
-
-//            UserToken token = new UserToken(resultModel.data.getUsername(), resultModel.data.getPassword());
-//            SecurityUtils.getSubject().login(token);
-//            SecurityUtils.getSubject().getSession().setAttribute(SessionConstant.CURRENTUSER, resultModel.data);
-        }
-        return resultModel;
-    }
 
 
     @GetMapping("/{username}/role")

@@ -174,7 +174,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
             setIcon(key.getIcon());
             setState(new StateBean() {{
                 setOpened(true);
-                setDisabled(role.getIseditable());
+                setDisabled(role.getEditable());
             }});
             setChildren(value.stream().map(b -> new PrivilegeTreeView() {{
                 setData(key.getId() + "_" + b.getId());
@@ -183,7 +183,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
                 setState(new StateBean() {{
                     setOpened(true);
                     setSelected(b.getIsenabled() == DataState.NAva);
-                    setDisabled(role.getIseditable());
+                    setDisabled(role.getEditable());
                 }});
             }}).collect(Collectors.toList()));
         }}));
@@ -200,9 +200,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
         entity.setLabel(rolename);
         entity.setDescription(description);
         entity.setState(DataState.Ava);
-        entity.setIseditable(true);
+        entity.setEditable(true);
         AlphazRoleEntity role = roleDAO.save(entity);
-        RoleDTO dto = new RoleDTO(role.getId(), role.getLabel(), role.getDescription(), role.getIseditable());
+        RoleDTO dto = new RoleDTO(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
         ResponseModel model = new ResponseModel();
         model.state = DataState.Ava;
         model.message = localizationService.getMessage("fetchSuccess");
@@ -213,7 +213,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     @Override
     public ResponseModel updateRole(RoleDTO role) {
         AlphazRoleEntity alphazRoleEntity = this.roleDAO.findOne(role.getId());
-        alphazRoleEntity.setLabel(role.getRolename());
+        alphazRoleEntity.setLabel(role.getRoleName());
         alphazRoleEntity.setDescription(role.getDescription());
         this.roleDAO.save(alphazRoleEntity);
         ResponseModel model = new ResponseModel();
@@ -226,7 +226,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     @Override
     public ResponseModel getRoleById(Long roleid) {
         AlphazRoleEntity role = this.roleDAO.findOne(roleid);
-        RoleDTO roleDTO = new RoleDTO(role.getId(), role.getLabel(), role.getDescription(), role.getIseditable());
+        RoleDTO roleDTO = new RoleDTO(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
         ResponseModel model = new ResponseModel();
         model.message = localizationService.getMessage("fetchSuccess");
         model.state = DataState.Ava;

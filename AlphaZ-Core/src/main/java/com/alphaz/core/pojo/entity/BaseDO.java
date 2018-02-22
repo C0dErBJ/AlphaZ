@@ -57,7 +57,7 @@ public abstract class BaseDO {
     }
 
     @Basic
-    @Column(name = "createtime", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+    @Column(name = "create_time", columnDefinition = "datetime default CURRENT_TIMESTAMP")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -67,7 +67,7 @@ public abstract class BaseDO {
     }
 
     @Basic
-    @Column(name = "updatetime", columnDefinition = "datetime on update CURRENT_TIMESTAMP")
+    @Column(name = "update_time", columnDefinition = "datetime on update CURRENT_TIMESTAMP")
     public Timestamp getUpdateTime() {
         return updateTime;
     }
@@ -76,7 +76,6 @@ public abstract class BaseDO {
         this.updateTime = updateTime;
     }
     @Basic
-    @Column(name = "createby")
     public Long getCreateBy() {
         return createBy;
     }
@@ -85,7 +84,6 @@ public abstract class BaseDO {
         this.createBy = createBy;
     }
     @Basic
-    @Column(name = "updateby")
     public Long getUpdateBy() {
         return updateBy;
     }

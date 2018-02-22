@@ -52,7 +52,7 @@ public class PriviligeController {
      */
     @PostMapping("role")
     public ResponseModel addRole(RoleDTO role) {
-        return this.privilegeService.addRole(role.rolename, role.description);
+        return this.privilegeService.addRole(role.roleName, role.description);
     }
 
     /**

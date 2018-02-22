@@ -3,7 +3,6 @@ package com.alphaz.core.authorization.pojo.entity;
 import com.alphaz.core.pojo.entity.BaseDO;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * ProjectName: alphaz
@@ -16,7 +15,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "alphaz_menu", schema = "alphaz", catalog = "")
 public class AlphazMenuEntity extends BaseDO {
-    private String menuname;
+    private String menuName;
     private String label;
     private String url;
     private Long parentid;
@@ -24,7 +23,6 @@ public class AlphazMenuEntity extends BaseDO {
     private String icon;
 
     @Basic
-    @Column(name = "url")
     public String getUrl() {
         return url;
     }
@@ -34,7 +32,6 @@ public class AlphazMenuEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "sort")
     public Integer getSort() {
         return sort;
     }
@@ -44,7 +41,6 @@ public class AlphazMenuEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "parentid")
     public Long getParentid() {
         return parentid;
     }
@@ -54,7 +50,6 @@ public class AlphazMenuEntity extends BaseDO {
     }
 
     @Basic
-    @Column(name = "icon")
     public String getIcon() {
         return icon;
     }
@@ -63,19 +58,16 @@ public class AlphazMenuEntity extends BaseDO {
         this.icon = icon;
     }
 
-
     @Basic
-    @Column(name = "menuname")
-    public String getMenuname() {
-        return menuname;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setMenuname(String menuname) {
-        this.menuname = menuname;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     @Basic
-    @Column(name = "label")
     public String getLabel() {
         return label;
     }

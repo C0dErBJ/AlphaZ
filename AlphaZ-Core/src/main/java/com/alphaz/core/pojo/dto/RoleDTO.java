@@ -10,16 +10,16 @@ package com.alphaz.core.pojo.dto;
  */
 public class RoleDTO {
     public Long id;
-    public String rolename;
+    public String roleName;
     public String description;
-    public boolean iseditable;
+    public boolean editable;
 
     public boolean getIseditable() {
-        return iseditable;
+        return editable;
     }
 
     public void setIseditable(boolean iseditable) {
-        this.iseditable = iseditable;
+        this.editable = iseditable;
     }
 
     public String getDescription() {
@@ -30,11 +30,11 @@ public class RoleDTO {
         this.description = description;
     }
 
-    public RoleDTO(Long id, String rolename, String description, boolean iseditable) {
+    public RoleDTO(Long id, String rolename, String description, boolean editable) {
         this.id = id;
-        this.rolename = rolename;
+        this.roleName = rolename;
         this.description = description;
-        this.iseditable = iseditable;
+        this.editable = editable;
     }
 
     public RoleDTO() {
@@ -48,11 +48,11 @@ public class RoleDTO {
         this.id = id;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

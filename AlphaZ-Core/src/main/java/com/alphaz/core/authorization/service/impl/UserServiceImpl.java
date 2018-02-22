@@ -18,8 +18,13 @@ import com.alphaz.core.authorization.service.PrivilegeService;
 import com.alphaz.util.string.DateUtil;
 import com.alphaz.util.valid.ValideHelper;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,6 +38,7 @@ import java.util.stream.Collectors;
  * Date: 2016-11-10
  * Time: 14:58
  * Description:
+ *
  * @author c0der
  */
 @Service
@@ -43,48 +49,6 @@ public class UserServiceImpl implements UserService {
     private PrivilegeService privilegeService;
     @Resource
     private TeamUserDAO teamUserDAO;
-
-
-    /**
-     * 登录
-     * String username 用户名
-     * String password 密码
-     */
-    @Override
-    public ResponseModel login(String name, String password) {
-        ResponseModel responseModel = new ResponseModel();
-        responseModel.message = "登录失败";
-        responseModel.state = DataState.NAva;
-        if (ValideHelper.isNullOrEmpty(name) || ValideHelper.isNullOrEmpty(password)) {
-            responseModel.message = "请填写用户名以及密码";
-            return responseModel;
-        }
-//        try {
-//            password = EncryptUtil.EncoderByMd5(password);
-//        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-
-        AlphazUserEntity user = userDAO.findFirstByUsernameAndPasswordAndState(name, password, DataState.Ava);
-
-        if (ValideHelper.isNullOrEmpty(user)) {
-            responseModel.message = "用户名或密码错误";
-            return responseModel;
-        }
-        MenuOperationModel mo = this.privilegeService.getMenuOperationByUserid(user.getId());
-        AlphazUserEntity userEntity = user;
-        userEntity.setUpdateTime(DateUtil.getTime());
-        userDAO.save(userEntity);
-        UserViewModel model = new UserViewModel();
-        model.setUsername(user.getUsername());
-        model.setPassword(user.getPassword());
-        model.setUserid(user.getId());
-        model.setAuth(mo.namePair);
-        responseModel.setData(model);
-        responseModel.message = "登录成功";
-        responseModel.state = DataState.Ava;
-        return responseModel;
-    }
 
     @Override
     public ResponseModel addUser(UserModel model) {
@@ -165,8 +129,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String findEmailByUsername(String username) {
-        AlphazUserEntity userEntity=this.userDAO.findByUsername(username);
-        if(userEntity==null){
+        AlphazUserEntity userEntity = this.userDAO.findByUsername(username);
+        if (userEntity == null) {
             return null;
         }
         return userEntity.getEmail();
@@ -174,8 +138,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseModel changePassword(String username, String password) {
-        AlphazUserEntity userEntity=this.userDAO.findByUsername(username);
-        if(userEntity==null){
+        AlphazUserEntity userEntity = this.userDAO.findByUsername(username);
+        if (userEntity == null) {
             return new ResponseModel(DataState.NAva, "用户不存在");
         }
         userEntity.setPassword(password);

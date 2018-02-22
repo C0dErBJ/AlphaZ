@@ -7,11 +7,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.builders.JdbcClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
+import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -31,20 +38,34 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${security.oauth2.resource.jwt.public-key}")
     private String publicKey;
 
-    @Value("${resource.id:spring-boot-application}") // 默认值spring-boot-application
+    @Value("${resource.id:spring-boot-application}")
     private String resourceId;
 
-    @Value("${access_token.validity_period:3600}") // 默认值3600
-            int accessTokenValiditySeconds = 3600;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private DataSource dataSource;
 
-    @Value("${tonr.redirect:http://localhost:8080/dashboard}")
-    private String redirectUri;
+    @Autowired
+    private UserApprovalHandler userApprovalHandler;
 
+    @Autowired
+    private ClientDetailsService clientDetailsService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Bean
+    @Autowired
+    public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore) {
+        TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
+        handler.setTokenStore(tokenStore);
+        handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
+        handler.setClientDetailsService(clientDetailsService);
+        return handler;
+    }
+
     @Bean
     public JwtAccessTokenConverter tokenEnhancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
@@ -52,14 +73,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         converter.setVerifierKey(publicKey);
         return converter;
     }
+
     @Bean
     public JwtTokenStore tokenStore() {
         return new JwtTokenStore(tokenEnhancer());
     }
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer configurer) {
-        configurer.tokenStore(tokenStore())
-                .userDetailsService(userDetailsService)
+        configurer.tokenStore(tokenStore()).accessTokenConverter(tokenEnhancer())
+                .userDetailsService(userDetailsService).userApprovalHandler(userApprovalHandler)
                 .authenticationManager(authenticationManager);
     }
 
@@ -73,35 +96,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //todo 持久化到数据库
-//        clients.jdbc(dataSource);
-        clients.inMemory()
+        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
 
-                // Confidential client where client secret can be kept safe (e.g. server side)
-                .withClient("confidential").secret("secret")
-                .authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token")
-                .scopes("read", "write")
-                .redirectUris("http://localhost:8080/client/")
-
-                .and()
-
-                // Public client where client secret is vulnerable (e.g. mobile apps, browsers)
-                .withClient("public") // No secret!
-                .authorizedGrantTypes("implicit")
-                .scopes("read")
-                .redirectUris("http://localhost:8080/client/")
-
-                .and()
-
-                // Trusted client: similar to confidential client but also allowed to handle user password
-                .withClient("trusted").secret("secret")
-                .authorities("ROLE_TRUSTED_CLIENT")
-                .authorizedGrantTypes("client_credentials", "password", "authorization_code", "refresh_token")
-                .scopes("read", "write")
-                .redirectUris("http://localhost:8080/client/")
-        ;
     }
-
-
 
 
 }
