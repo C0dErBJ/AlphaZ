@@ -41,6 +41,12 @@ public class ResponseModel<T> {
         this.message = message;
     }
 
+    public ResponseModel(DataState state, String message, String httpStatus) {
+        this.state = state;
+        this.message = message;
+        this.httpStatus = httpStatus;
+    }
+
     public ResponseModel() {
     }
 

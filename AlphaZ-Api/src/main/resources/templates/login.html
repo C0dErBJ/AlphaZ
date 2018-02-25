@@ -167,7 +167,7 @@
 
     $("#abc").click(function () {
         $.ajax({
-            url: "oauth/authorize?grant_type=password&response_type=token&username=trusted&password=secret",
+            url: "oauth/token?grant_type=password&response_type=token&username=admin&password=111111&client_id=admin&client_secret=111111&scope=select",
             type: "post",
             dataType: "json",
             success: function (data) {

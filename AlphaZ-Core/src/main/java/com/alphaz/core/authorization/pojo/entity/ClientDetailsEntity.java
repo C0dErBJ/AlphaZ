@@ -9,7 +9,7 @@ import java.util.Objects;
  * @Description:
  */
 @Entity
-@Table(name = "ClientDetails", schema = "alphaz", catalog = "")
+@Table(name = "clientdetails", schema = "alphaz", catalog = "")
 public class ClientDetailsEntity {
     private String appId;
     private String resourceIds;
