@@ -1,0 +1,16 @@
+{
+    "remoteServiceBaseUrl": "http://localhost:5000",
+    "swaggerApiJsonUrl":"http://localhost:5000/swagger/v1/swagger.json",
+    "appBaseUrl": "http://localhost:4200",
+    "localeMappings": [
+      {
+        "from": "pt-BR",
+        "to": "pt"
+      },
+      {
+        "from": "zh-CN",
+        "to": "zh"
+      }
+    ]
+  }
+  

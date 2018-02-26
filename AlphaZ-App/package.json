@@ -9,9 +9,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "postinstall": "npm run tsformat",
-        "tsformat": "tsfmt -r",
-        "prebuild": "echo a"
+        "postinstall": "npm run tsformat;node src/swagger/swagger-generator.js",
+        "tsformat": "tsfmt -r"
     },
     
     "private": true,
