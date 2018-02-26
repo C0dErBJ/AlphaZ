@@ -10,8 +10,10 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "postinstall": "npm run tsformat",
-        "tsformat": "tsfmt -r"
+        "tsformat": "tsfmt -r",
+        "prebuild": "echo a"
     },
+    
     "private": true,
     "dependencies": {
         "@angular/animations": "^5.0.0",

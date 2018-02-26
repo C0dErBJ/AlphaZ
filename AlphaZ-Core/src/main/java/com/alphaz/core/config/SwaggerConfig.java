@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -37,7 +38,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                .apis(RequestHandlerSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
     }
@@ -45,9 +46,8 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     private ApiInfo apiInfo() {
 
         return new ApiInfoBuilder()
-                .title("alphaz  Api")
-                .description("所有api统一返回{\"state\":0,\"data\":null,\"message\":null},statusCode为业务状态0为成功，1为失败，message为具体描述，data存放具体返回值，会在api中Response里面具体描述\n" +
-                        "\n")
+                .title("AlphaZ  Api")
+                .description("AlphaZ Swagger Api")
                 .version("V1.0.0")
                 .build();
     }

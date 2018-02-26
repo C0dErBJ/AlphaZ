@@ -79,3 +79,7 @@ gradle-app.setting
 **/*.iml
 **/*.ipr
 /Core/out/
+node_modules/
+yarn-error.log
+.vscode/
+yarn.lock
