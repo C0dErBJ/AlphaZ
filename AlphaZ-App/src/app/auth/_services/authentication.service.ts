@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import "rxjs/add/operator/map";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { CustomerControllerService } from '@utility/http-services/api//customerController.service';
 
 @Injectable()
 export class AuthenticationService {

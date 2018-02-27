@@ -1,6 +1,6 @@
 {
     "remoteServiceBaseUrl": "http://localhost:5000",
-    "swaggerApiJsonUrl":"http://localhost:5000/swagger/v1/swagger.json",
+    "swaggerApiJsonUrl":"http://localhost:8080/v2/api-docs",
     "appBaseUrl": "http://localhost:4200",
     "localeMappings": [
       {

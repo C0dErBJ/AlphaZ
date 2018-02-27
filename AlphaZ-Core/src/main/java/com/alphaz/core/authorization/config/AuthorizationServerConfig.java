@@ -43,9 +43,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private String resourceId;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private DataSource dataSource;
 
     @Autowired
@@ -56,6 +53,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     @Autowired
@@ -73,11 +72,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         converter.setSigningKey(privateKey);
         converter.setVerifierKey(publicKey);
         return converter;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
