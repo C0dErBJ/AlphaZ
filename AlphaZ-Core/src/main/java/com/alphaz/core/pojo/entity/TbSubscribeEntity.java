@@ -18,8 +18,15 @@ public class TbSubscribeEntity extends BaseDO {
     private Long productid;
     private Long customerid;
     private Integer amount;
+    private String test;
 
+    public String getTest() {
+        return test;
+    }
 
+    public void setTest(String test) {
+        this.test = test;
+    }
 
     @Basic
     @Column(name = "productid")

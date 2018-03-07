@@ -2,7 +2,6 @@ package com.alphaz.task.config;
 
 import com.alphaz.core.pojo.viewmodel.user.UserViewModel;
 import com.alphaz.task.listener.JobListener;
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -19,6 +18,8 @@ import org.springframework.batch.support.DatabaseType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
 
 /**
  * ProjectName: alphaz

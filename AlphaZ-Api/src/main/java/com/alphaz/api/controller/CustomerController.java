@@ -4,7 +4,6 @@ import com.alphaz.core.constant.DataState;
 import com.alphaz.core.pojo.viewmodel.DataTableModel;
 import com.alphaz.core.pojo.viewmodel.ResponseModel;
 import com.alphaz.core.pojo.viewmodel.customer.CustomerListViewModel;
-import com.alphaz.core.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -30,21 +29,19 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class CustomerController {
 
-    @Resource
-    private CustomerService customerService;
 
     @GetMapping("list")
     @ApiOperation(value = "获取用户列表", produces = "application/json")
     public DataTableModel<List<CustomerListViewModel>> list(@RequestParam Integer start, @RequestParam Integer length, @RequestParam(required = false) Integer draw) {
-        ResponseModel<Page<CustomerListViewModel>> handledModel = customerService.pagation(start / length, length);
-        DataTableModel<List<CustomerListViewModel>> model = new DataTableModel<>();
-        if (handledModel.state == DataState.NAva) {
-            return model;
-        }
-        model.setDraw(draw);
-        model.setRecordsFiltered(handledModel.data.getTotalElements());
-        model.setRecordsTotal(handledModel.data.getTotalElements());
-        model.setData(handledModel.getData().getContent());
-        return model;
+//        ResponseModel<Page<CustomerListViewModel>> handledModel = customerService.pagation(start / length, length);
+//        DataTableModel<List<CustomerListViewModel>> model = new DataTableModel<>();
+//        if (handledModel.state == DataState.NAva) {
+//            return model;
+//        }
+//        model.setDraw(draw);
+//        model.setRecordsFiltered(handledModel.data.getTotalElements());
+//        model.setRecordsTotal(handledModel.data.getTotalElements());
+//        model.setData(handledModel.getData().getContent());
+        return null;
     }
 }

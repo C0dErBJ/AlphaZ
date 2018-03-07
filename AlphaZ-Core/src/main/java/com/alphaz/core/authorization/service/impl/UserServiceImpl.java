@@ -9,22 +9,15 @@ import com.alphaz.core.authorization.dao.UserDAO;
 import com.alphaz.core.pojo.entity.TbTeamusersEntity;
 import com.alphaz.core.pojo.viewmodel.DataTableModel;
 import com.alphaz.core.pojo.viewmodel.ResponseModel;
-import com.alphaz.core.pojo.viewmodel.privilege.MenuOperationModel;
 import com.alphaz.core.pojo.viewmodel.user.UserModel;
 import com.alphaz.core.pojo.viewmodel.user.UserSearchModel;
 import com.alphaz.core.pojo.viewmodel.user.UserUpdateModel;
 import com.alphaz.core.pojo.viewmodel.user.UserViewModel;
 import com.alphaz.core.authorization.service.PrivilegeService;
-import com.alphaz.util.string.DateUtil;
 import com.alphaz.util.valid.ValideHelper;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -69,7 +62,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseModel deleteUser(Long userid) {
-        AlphazUserEntity user = this.userDAO.findOne(userid);
+        AlphazUserEntity user = this.userDAO.getOne(userid);
 
         if (user == null) {
             return new ResponseModel(DataState.NAva, "用户不存在");
@@ -81,7 +74,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseModel updateUser(Long userid, UserUpdateModel model) {
-        AlphazUserEntity user = this.userDAO.findOne(userid);
+        AlphazUserEntity user = this.userDAO.getOne(userid);
         if (user == null) {
             return new ResponseModel(DataState.NAva, "用户未找到");
         }

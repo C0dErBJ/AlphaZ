@@ -46,7 +46,7 @@ public class BaseRepoImpl<T extends BaseDO, ID extends Serializable> extends Sim
     @Override
     @Transactional
     public T deleteLogically(ID id) {
-        T t = this.findOne(id);
+        T t = this.getOne(id);
         if (t == null) {
             return null;
         }

@@ -20,6 +20,9 @@ open class LocalizationServiceImpl : LocalizationService {
 
 
     val logger = LoggerFactory.getLogger(LocalizationServiceImpl::class.java)
+
+
+
     @Resource
     lateinit var messageSource: MessageSource
 

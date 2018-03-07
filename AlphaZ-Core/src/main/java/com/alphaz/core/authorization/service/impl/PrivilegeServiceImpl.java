@@ -166,7 +166,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     @Override
     public ResponseModel getMOByRoleid(Long roleid) {
         MenuOperationModel moModel = this.getMenuOperationByRoleid(roleid);
-        AlphazRoleEntity role = this.roleDAO.findOne(roleid);
+        AlphazRoleEntity role = this.roleDAO.getOne(roleid);
         List<PrivilegeTreeView> list = new ArrayList<>();
         moModel.keyPair.forEach((key, value) -> list.add(new PrivilegeTreeView() {{
             setText(key.getLabel());
@@ -212,7 +212,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel updateRole(RoleDTO role) {
-        AlphazRoleEntity alphazRoleEntity = this.roleDAO.findOne(role.getId());
+        AlphazRoleEntity alphazRoleEntity = this.roleDAO.getOne(role.getId());
         alphazRoleEntity.setLabel(role.getRoleName());
         alphazRoleEntity.setDescription(role.getDescription());
         this.roleDAO.save(alphazRoleEntity);
@@ -225,7 +225,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel getRoleById(Long roleid) {
-        AlphazRoleEntity role = this.roleDAO.findOne(roleid);
+        AlphazRoleEntity role = this.roleDAO.getOne(roleid);
         RoleDTO roleDTO = new RoleDTO(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
         ResponseModel model = new ResponseModel();
         model.message = localizationService.getMessage("fetchSuccess");
@@ -306,7 +306,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
                     .where(newbb)
                     .fetch();
 //保存新增的角色对应权限
-            rmodao.save(alphazMenuOperationEntities.stream().map(b -> {
+            rmodao.saveAll(alphazMenuOperationEntities.stream().map(b -> {
                 AlphazRMOEntity rmoEntity = new AlphazRMOEntity();
                 needToInsert.stream().filter(a -> b.getOperationid().equals(a.getOperationid()) && b.getMenuid().equals(a.getMenuid()))
                         .findFirst().ifPresent(c -> {
@@ -324,7 +324,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
                         .ifPresent(c -> c.setState(b.getState()))
         );
         //更新已经有的权限对应角色状态
-        rmodao.save(staticMo.stream().map(model -> {
+        rmodao.saveAll(staticMo.stream().map(model -> {
             AlphazRMOEntity alphazRMOEntity = new AlphazRMOEntity();
             alphazRMOEntity.setId(model.getId());
             alphazRMOEntity.setMoid(model.getMoid());

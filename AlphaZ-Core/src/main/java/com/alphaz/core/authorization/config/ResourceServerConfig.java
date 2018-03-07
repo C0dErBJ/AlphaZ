@@ -47,8 +47,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private String privateKey;
     @Autowired
     private JwtAccessTokenConverter tokenEnhancer;
-    @Autowired
-    private LocalizationService localizationService;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer config) {

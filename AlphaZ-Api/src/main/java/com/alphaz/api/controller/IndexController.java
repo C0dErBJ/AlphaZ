@@ -5,7 +5,6 @@ import com.alphaz.core.constant.MenuConst;
 import com.alphaz.core.constant.SessionConstant;
 import com.alphaz.core.pojo.viewmodel.ResponseModel;
 import com.alphaz.core.pojo.viewmodel.user.UserViewModel;
-import com.alphaz.core.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,8 +26,6 @@ public class IndexController {
 
     @Resource
     private PrivilegeService privilegeService;
-    @Resource
-    private ApiService apiService;
 
     @GetMapping("login")
     public ModelAndView login(HttpServletRequest request) {
@@ -94,12 +91,6 @@ public class IndexController {
         ModelAndView mav = new ModelAndView("product/productlist");
         mav.addObject("menu", MenuConst.PRODUCT);
         return mav;
-    }
-
-    @GetMapping(value = "script", produces = "application/javascript")
-    @ResponseBody
-    public String Script(String scriptType) {
-        return apiService.getAllApi(scriptType);
     }
 
 }

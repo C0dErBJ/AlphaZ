@@ -8,6 +8,7 @@ import com.alphaz.util.string.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -81,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
             if (request.getContentType() == null || REST_CONTENT_TYPE.contains(request.getContentType().toLowerCase())) {
                 response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(JsonHelper.toString(new ResponseModel<>(DataState.NAva, localizationService.getMessage("needAuthorization"),"401")));
+                response.getWriter().write(JsonHelper.toString(new ResponseModel<>(DataState.NAva, localizationService.getMessage("needAuthorization"), "401")));
             } else {
                 response.sendRedirect("/login");
             }
@@ -106,7 +107,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
-
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }
 
 

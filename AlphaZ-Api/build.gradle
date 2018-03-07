@@ -1,38 +1,35 @@
 version '1.0-SNAPSHOT'
-
-
-buildscript {
-    repositories {
-        maven {
-            url "http://122.112.234.252:8888/nexus/content/groups/public/"
-        }
-    }
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
-    }
-}
-
 apply plugin: 'org.springframework.boot'
-bootRepackage {
-    mainClass = 'com.alphaz.api.Application'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "org.flywaydb.flyway"
+
+bootJar {
+    mainClassName = 'com.alphaz.api.Application'
 }
 dependencies {
     compile project(':AlphaZ-Core')
-//    compile project(':plugin/oauth')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf",
             "org.springframework.boot:spring-boot-devtools",
             "org.springframework.boot:spring-boot-starter-actuator",
-            "net.sourceforge.nekohtml:nekohtml:1.9.22",
-            "com.github.theborakompanioni:thymeleaf-extras-shiro:${shiroThymleaf}",
+            "net.sourceforge.nekohtml:nekohtml:${neohtmlVersion}",
             "org.springframework.boot:spring-boot-starter-test",
-            "org.springframework.boot:spring-boot-starter-websocket"
+            "org.springframework.boot:spring-boot-starter-websocket",
+            "org.springframework.boot:spring-boot-properties-migrator"
 
     )
 
 //    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
+//具体查看
+//https://flywaydb.org/documentation/gradle/
+flyway {
+    url = 'jdbc:mysql://localhost:3306/alphaz?autoReconnect=true&amp;useUnicode=true'
+    user = 'root'
+    password = '123456'
+    schemas = ['alphaz']
+}
+
 
 
 
