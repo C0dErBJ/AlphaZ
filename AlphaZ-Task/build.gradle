@@ -1,11 +1,12 @@
 version '1.0-SNAPSHOT'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+
 
 bootJar {
     mainClassName = 'com.alphaz.task.Application'
 }
-
+jar {
+    enabled = true
+}
 dependencies {
     compile project(':AlphaZ-Core')
     compile(

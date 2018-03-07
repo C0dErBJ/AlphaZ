@@ -2,7 +2,7 @@ buildscript {
     ext {
         kotlinVersion = '1.2.21'
         bootGralde = '2.0.1.BUILD-SNAPSHOT'
-        flyway='5.0.7'
+        flyway = '5.0.7'
     }
     repositories {
         maven {
@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${bootGralde}"
         classpath "gradle.plugin.com.boxfuse.client:gradle-plugin-publishing:${flyway}"
     }
@@ -38,8 +38,9 @@ subprojects {
         querydslVersion = '4.1.4'
         dubboVersion = '1.0.0'
         springSecurityJwt = '1.0.8.RELEASE'
-        flywayVersion='5.0.7'
-        neohtmlVersion='1.9.22'
+        flywayVersion = '5.0.7'
+        neohtmlVersion = '1.9.22'
+        junitVersion = "4.12"
 
     }
 
@@ -57,6 +58,8 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'kotlin'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     compileKotlin {
         kotlinOptions {
@@ -72,15 +75,12 @@ subprojects {
 
     dependencies {
         compile(
-//                "com.fasterxml.jackson.core:jackson-databind:${jackson}",
-//                "com.fasterxml.jackson.core:jackson-core:${jackson}",
-//                "com.fasterxml.jackson.core:jackson-annotations:${jackson}",
                 "org.springframework.boot:spring-boot-starter-json",
 
         )
         compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-        testCompile group: 'junit', name: 'junit', version: '4.12'
+        testCompile "junit:junit:${junitVersion}"
         compile fileTree(dir: 'libs', include: ['**/*.jar', '**/*.json'])
     }
 }
