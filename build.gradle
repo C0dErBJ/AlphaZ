@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.21'
+        kotlinVersion = '1.2.30'
         bootGralde = '2.0.1.BUILD-SNAPSHOT'
         flyway = '5.0.7'
     }
@@ -30,7 +30,6 @@ version '1.0-SNAPSHOT'
 subprojects {
 
     ext {
-        springVersion = '4.3.3.RELEASE'
         okhttp = '3.8.0'
         netty = '5.0.0.Alpha2'
         pinyin4j = '2.5.1'

@@ -1,0 +1,17 @@
+version '1.0-SNAPSHOT'
+
+bootJar {
+    mainClassName = 'com.alphaz.task.Application'
+}
+jar {
+    enabled = true
+}
+dependencies {
+    compile project(':Application')
+    compile project(':Infrastructure')
+    compile("org.springframework.boot:spring-boot-starter-actuator",
+            "org.springframework.boot:spring-boot-starter-batch")
+
+}
+
+

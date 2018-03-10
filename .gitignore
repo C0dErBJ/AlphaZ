@@ -44,7 +44,7 @@ hs_err_pid*
 
 # IntelliJ
 /out/
-out
+#out
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -78,8 +78,7 @@ gradle-app.setting
 /*.ipr
 **/*.iml
 **/*.ipr
-/Core/out/
-node_modules/
+node_modules
 yarn-error.log
-.vscode/
+.vscode
 yarn.lock

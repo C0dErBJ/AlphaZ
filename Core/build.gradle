@@ -1,0 +1,44 @@
+version '1.0-SNAPSHOT'
+apply plugin: 'kotlin-kapt'
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    compile project(':Infrastructure')
+    compile(
+            "org.springframework.boot:spring-boot-starter-mail",
+//            "org.springframework.boot:spring-boot-starter-data-redis",
+            "org.springframework.boot:spring-boot-starter-cache",
+            "mysql:mysql-connector-java",
+//            "io.dubbo.springboot:spring-boot-starter-dubbo:${dubboVersion}",
+
+//            "org.flywaydb:flyway-core:${flywayVersion}"
+    )
+
+    kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
+}
+kapt {
+    javacOptions {
+        option("-proc:only")
+        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
+    }
+}
+idea {
+    module {
+        def kaptMain = file('build/generated/source/kapt/main')
+        sourceDirs += kaptMain
+        generatedSourceDirs += kaptMain
+    }
+}
+
+
+
+
+
+

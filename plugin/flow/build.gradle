@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 
 dependencies {
-    compile project(':AlphaZ-Core')
+    compile project(':Core')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile(
             "org.activiti:activiti-spring-boot-starter-basic:6.0.0.RC1"
