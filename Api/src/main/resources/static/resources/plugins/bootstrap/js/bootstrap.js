@@ -155,7 +155,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.alert.Constructor = Alert
 
 
-  // ALERT NO CONFLICT
+  // ALERT DELETED CONFLICT
   // =================
 
   $.fn.alert.noConflict = function () {
@@ -267,7 +267,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.button.Constructor = Button
 
 
-  // BUTTON NO CONFLICT
+  // BUTTON DELETED CONFLICT
   // ==================
 
   $.fn.button.noConflict = function () {
@@ -492,7 +492,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.carousel.Constructor = Carousel
 
 
-  // CAROUSEL NO CONFLICT
+  // CAROUSEL DELETED CONFLICT
   // ====================
 
   $.fn.carousel.noConflict = function () {
@@ -722,7 +722,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.collapse.Constructor = Collapse
 
 
-  // COLLAPSE NO CONFLICT
+  // COLLAPSE DELETED CONFLICT
   // ====================
 
   $.fn.collapse.noConflict = function () {
@@ -893,7 +893,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.dropdown.Constructor = Dropdown
 
 
-  // DROPDOWN NO CONFLICT
+  // DROPDOWN DELETED CONFLICT
   // ====================
 
   $.fn.dropdown.noConflict = function () {
@@ -1223,7 +1223,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.modal.Constructor = Modal
 
 
-  // MODAL NO CONFLICT
+  // MODAL DELETED CONFLICT
   // =================
 
   $.fn.modal.noConflict = function () {
@@ -1765,7 +1765,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.tooltip.Constructor = Tooltip
 
 
-  // TOOLTIP NO CONFLICT
+  // TOOLTIP DELETED CONFLICT
   // ===================
 
   $.fn.tooltip.noConflict = function () {
@@ -1874,7 +1874,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.popover.Constructor = Popover
 
 
-  // POPOVER NO CONFLICT
+  // POPOVER DELETED CONFLICT
   // ===================
 
   $.fn.popover.noConflict = function () {
@@ -2036,7 +2036,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.scrollspy.Constructor = ScrollSpy
 
 
-  // SCROLLSPY NO CONFLICT
+  // SCROLLSPY DELETED CONFLICT
   // =====================
 
   $.fn.scrollspy.noConflict = function () {
@@ -2190,7 +2190,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.tab.Constructor = Tab
 
 
-  // TAB NO CONFLICT
+  // TAB DELETED CONFLICT
   // ===============
 
   $.fn.tab.noConflict = function () {
@@ -2348,7 +2348,7 @@ if (typeof jQuery === 'undefined') {
   $.fn.affix.Constructor = Affix
 
 
-  // AFFIX NO CONFLICT
+  // AFFIX DELETED CONFLICT
   // =================
 
   $.fn.affix.noConflict = function () {

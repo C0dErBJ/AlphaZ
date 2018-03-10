@@ -145,7 +145,7 @@ class fs
 		if(is_file($dir)) {
 			unlink($dir);
 		}
-		return array('status' => 'OK');
+		return array('status' => 'ACTIVE');
 	}
 	public function move($id, $par) {
 		$dir = $this->path($id);

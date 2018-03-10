@@ -31,7 +31,7 @@ public class CustomerController {
 //    public DataTableModel<List<CustomerListViewModel>> list(@RequestParam Integer start, @RequestParam Integer length, @RequestParam(required = false) Integer draw) {
 ////        ResponseModel<Page<CustomerListViewModel>> handledModel = customerService.pagation(start / length, length);
 ////        DataTableModel<List<CustomerListViewModel>> model = new DataTableModel<>();
-////        if (handledModel.state == State.NO) {
+////        if (handledModel.state == State.DELETED) {
 ////            return model;
 ////        }
 ////        model.setDraw(draw);

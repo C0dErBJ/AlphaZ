@@ -1,7 +1,7 @@
 package com.alphaz.core.authorization.model.role;
 
 
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
 
 /**
  * ProjectName: alphaz

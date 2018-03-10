@@ -1,6 +1,6 @@
 package com.alphaz.infrastructure.dao.jpa
 
-import com.alphaz.infrastructure.domain.constant.State
+import com.alphaz.infrastructure.domain.constant.common.State
 import com.alphaz.infrastructure.domain.model.entity.BaseEntity
 import com.querydsl.jpa.hibernate.HibernateQueryFactory
 import org.hibernate.Session
@@ -21,7 +21,7 @@ open class BaseRepositoryImpl<T : BaseEntity, ID>(jpaEntityInformation: JpaEntit
     override fun removeById(id: ID) {
         var entity = this.findById(id);
         if (entity.isPresent) {
-            entity.get().state = State.NO;
+            entity.get().state = State.DELETED;
             super.save(entity.get());
         }
     }
@@ -30,7 +30,7 @@ open class BaseRepositoryImpl<T : BaseEntity, ID>(jpaEntityInformation: JpaEntit
      * 逻辑删除
      */
     override fun remove(entity: T) {
-        entity.state = State.NO;
+        entity.state = State.DELETED;
         super.save(entity);
     }
 

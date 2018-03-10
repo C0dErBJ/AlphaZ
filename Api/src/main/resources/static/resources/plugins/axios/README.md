@@ -353,7 +353,7 @@ The response for a request contains the following information.
   status: 200,
 
   // `statusText` is the HTTP status message from the server response
-  statusText: 'OK',
+  statusText: ACTIVE,
 
   // `headers` the headers that the server responded with
   // All header names are lower cased

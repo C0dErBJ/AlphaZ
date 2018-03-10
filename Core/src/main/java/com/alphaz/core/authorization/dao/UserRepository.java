@@ -4,7 +4,7 @@ import com.alphaz.core.authorization.entity.AlphazUserEntity;
 import com.alphaz.core.authorization.model.permission.MenuOperation;
 import com.alphaz.core.authorization.model.role.Role;
 import com.alphaz.core.authorization.model.user.UserRole;
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
 import com.alphaz.infrastructure.dao.jpa.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
 

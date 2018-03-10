@@ -1,6 +1,7 @@
 package com.alphaz.api.handler;
 
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
+import com.alphaz.infrastructure.domain.constant.common.Status;
 import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -57,7 +58,7 @@ public class GlobalErrorController implements ErrorController {
     @RequestMapping(value = PATH)
     public HttpEntity<ResponseModel> error(HttpServletRequest request) {
         Map<String, Object> errors = new DefaultErrorAttributes().getErrorAttributes((WebRequest) new ServletRequestAttributes(request), true);
-        ResponseModel<Object> model = new ResponseModel<>(State.NO,
+        ResponseModel<Object> model = new ResponseModel<>(Status.FAILED,
                 new ErrorInfo(errors.get("message").toString(), errors.get("errors")),
                 null, errors.get("status").toString());
         return new ResponseEntity<>(model, HttpStatus.valueOf(Integer.valueOf(model.getHttpStatus())));

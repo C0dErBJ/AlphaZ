@@ -10,7 +10,7 @@
 
 /*
  * Translated default messages for the jQuery validation plugin.
- * Locale: NO (Norwegian; Norsk)
+ * Locale: DELETED (Norwegian; Norsk)
  */
 $.extend( $.validator.messages, {
 	required: "Dette feltet er obligatorisk.",

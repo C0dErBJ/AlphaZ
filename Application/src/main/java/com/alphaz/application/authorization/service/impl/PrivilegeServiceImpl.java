@@ -14,7 +14,8 @@ import com.alphaz.core.authorization.dao.RMORepository;
 import com.alphaz.core.authorization.dao.RoleRepository;
 import com.alphaz.core.authorization.dao.UserRepository;
 import com.alphaz.core.service.LocalizationService;
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
+import com.alphaz.infrastructure.domain.constant.common.Status;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
 import com.alphaz.infrastructure.util.extension.StreamPredicate;
 import com.alphaz.infrastructure.util.valid.ValideHelper;
@@ -70,7 +71,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel getUserRoleByUsername(String username) {
-        return new ResponseModel(State.OK, null, this.getUserRole(username));
+        return new ResponseModel(Status.SUCCESS, null, this.getUserRole(username));
     }
 
     @Override
@@ -87,7 +88,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel getMOByUserid(Long userid) {
-        return new ResponseModel(State.OK, null, this.getMenuOperationByUserid(userid));
+        return new ResponseModel(Status.SUCCESS, null, this.getMenuOperationByUserid(userid));
     }
 
     @Override
@@ -114,21 +115,21 @@ public class PrivilegeServiceImpl implements PrivilegeService {
             }
             menuViewModels.add(mvm);
         });
-        ResponseModel model = new ResponseModel(State.OK, null, menuViewModels);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, menuViewModels);
         return model;
     }
 
     @Override
     public ResponseModel getRoles(Long userid) {
         List<Role> rolelist = userRepository.findRolesByUserid(userid);
-        ResponseModel<List<Role>> model = new ResponseModel(State.OK, null, rolelist);
+        ResponseModel<List<Role>> model = new ResponseModel(Status.SUCCESS, null, rolelist);
         return model;
     }
 
     @Override
     @Transactional
     public ResponseModel deleteRole(Long roleid) {
-        this.roleRepository.JQF().update(QAlphazRoleEntity.alphazRoleEntity).where(QAlphazRoleEntity.alphazRoleEntity.id.eq(roleid)).set(QAlphazRoleEntity.alphazRoleEntity.state, State.NO).execute();
+        this.roleRepository.JQF().update(QAlphazRoleEntity.alphazRoleEntity).where(QAlphazRoleEntity.alphazRoleEntity.id.eq(roleid)).set(QAlphazRoleEntity.alphazRoleEntity.state, State.DELETED).execute();
         this.rmodao.deleteAlphazRMOEntitiesByRid(roleid);
         ResponseModel model = new ResponseModel();
         return model;
@@ -152,8 +153,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
             }}).collect(Collectors.toList()));
         }}));
         data.menuOperation = list;
-        data.roleList = this.userRepository.findALLRolesByState(State.OK);
-        ResponseModel model = new ResponseModel(State.OK, null, data);
+        data.roleList = this.userRepository.findALLRolesByState(State.ACTIVE);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, data);
         return model;
     }
 
@@ -176,12 +177,12 @@ public class PrivilegeServiceImpl implements PrivilegeService {
                 setIcon(b.getIcon());
                 setState(new StateBean() {{
                     setOpened(true);
-                    setSelected(b.getIsenabled() == State.NO);
+                    setSelected(b.getIsenabled() == State.DELETED);
                     setDisabled(role.getEditable());
                 }});
             }}).collect(Collectors.toList()));
         }}));
-        ResponseModel model = new ResponseModel(State.OK, null, list);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, list);
         return model;
     }
 
@@ -190,11 +191,11 @@ public class PrivilegeServiceImpl implements PrivilegeService {
         AlphazRoleEntity entity = new AlphazRoleEntity();
         entity.setLabel(rolename);
         entity.setDescription(description);
-        entity.setState(State.OK);
+        entity.setState(State.ACTIVE);
         entity.setEditable(true);
         AlphazRoleEntity role = roleRepository.save(entity);
         Role dto = new Role(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
-        ResponseModel model = new ResponseModel(State.OK, null, dto);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, dto);
         return model;
     }
 
@@ -204,7 +205,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
         alphazRoleEntity.setLabel(role.getRoleName());
         alphazRoleEntity.setDescription(role.getDescription());
         this.roleRepository.save(alphazRoleEntity);
-        ResponseModel model = new ResponseModel(State.OK, null, role);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, role);
         return model;
     }
 
@@ -212,7 +213,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     public ResponseModel getRoleById(Long roleid) {
         AlphazRoleEntity role = this.roleRepository.getOne(roleid);
         Role roleDTO = new Role(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
-        ResponseModel model = new ResponseModel(State.OK,null,roleDTO);
+        ResponseModel model = new ResponseModel(Status.SUCCESS,null,roleDTO);
         return model;
     }
 

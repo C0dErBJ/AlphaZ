@@ -8,7 +8,7 @@ import com.alphaz.core.authorization.entity.AlphazUserEntity;
 import com.alphaz.core.authorization.dao.UserRepository;
 import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
 import com.alphaz.infrastructure.util.valid.ValideHelper;
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         AlphazUserEntity entity = new AlphazUserEntity();
         entity.setUsername(model.username);
         entity.setPassword(model.password);
-        entity.setState(State.OK);
+        entity.setState(State.ACTIVE);
         entity.setPhone(model.phone);
         entity = userRepository.save(entity);
         return new ResponseModel();
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return new ResponseModel(new ErrorInfo("用户不存在"));
         }
-        user.setState(State.NO);
+        user.setState(State.DELETED);
         this.userRepository.save(user);
         return new ResponseModel();
     }

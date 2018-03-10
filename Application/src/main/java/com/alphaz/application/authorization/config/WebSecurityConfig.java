@@ -1,9 +1,10 @@
 package com.alphaz.application.authorization.config;
 
+import com.alphaz.infrastructure.domain.constant.common.Status;
 import com.alphaz.infrastructure.util.string.JsonHelper;
 import com.alphaz.application.authorization.service.UserService;
 import com.alphaz.core.service.LocalizationService;
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
 import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
             if (request.getContentType() == null || REST_CONTENT_TYPE.contains(request.getContentType().toLowerCase())) {
                 response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(JsonHelper.toString(new ResponseModel(State.NO, new ErrorInfo(localizationService.getMessage("needAuthorization")), "401")));
+                response.getWriter().write(JsonHelper.toString(new ResponseModel(Status.FAILED, new ErrorInfo(localizationService.getMessage("needAuthorization")), "401")));
             } else {
                 response.sendRedirect("/login");
             }

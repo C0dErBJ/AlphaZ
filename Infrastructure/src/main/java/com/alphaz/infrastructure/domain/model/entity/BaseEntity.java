@@ -1,6 +1,10 @@
 package com.alphaz.infrastructure.domain.model.entity;
 
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,6 +16,8 @@ import java.time.LocalDateTime;
  * @since May 19, 2010
  */
 @MappedSuperclass
+@FilterDef(name = "dataStateCondition", parameters = {@ParamDef(name = "state", type = "long")})
+@Filter(name = "dataStateCondition", condition = "state = :ownerRef")
 public abstract class BaseEntity {
 
     /**

@@ -1,7 +1,7 @@
 package com.alphaz.application.authorization.dto.privilege;
 
 
-import com.alphaz.infrastructure.domain.constant.State;
+import com.alphaz.infrastructure.domain.constant.common.State;
 
 /**
  * ProjectName: alphaz
