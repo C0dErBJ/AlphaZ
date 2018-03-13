@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * Description:This is a class of com.alphaz.core.pojo.entity
  */
 @Entity
-@Table(name = "alphaz_user", schema = "alphaz", catalog = "")
+@Table(name = "alphaz_user", catalog = "")
 public class AlphazUserEntity extends BaseEntity {
     private Long avatar;
     private String note;

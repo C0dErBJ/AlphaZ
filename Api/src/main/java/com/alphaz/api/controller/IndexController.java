@@ -2,6 +2,7 @@ package com.alphaz.api.controller;
 
 import com.alphaz.application.authorization.dto.user.UserViewModel;
 import com.alphaz.application.authorization.service.PrivilegeService;
+import com.alphaz.application.authorization.service.UserService;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,8 @@ public class IndexController {
 
     @Resource
     private PrivilegeService privilegeService;
+    @Resource
+    private UserService userService;
 
     @GetMapping("login")
     public ModelAndView login(HttpServletRequest request) {
@@ -64,6 +67,8 @@ public class IndexController {
     @GetMapping("privilege")
     public ModelAndView privilege() {
         ModelAndView mav = new ModelAndView("privilege/privilege");
+        String entity = userService.findEmailByUsername("aaa");
+        System.out.println(entity);
         return mav;
     }
 

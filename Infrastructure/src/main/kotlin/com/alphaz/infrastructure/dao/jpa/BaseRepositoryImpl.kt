@@ -6,6 +6,7 @@ import com.querydsl.jpa.hibernate.HibernateQueryFactory
 import org.hibernate.Session
 import org.springframework.data.jpa.repository.support.JpaEntityInformation
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository
+import org.springframework.data.repository.NoRepositoryBean
 import javax.persistence.EntityManager
 
 /**
@@ -13,6 +14,7 @@ import javax.persistence.EntityManager
  *@Date: 下午3:58 2018/3/8
  *@Description:
  */
+@NoRepositoryBean
 open class BaseRepositoryImpl<T : BaseEntity, ID>(jpaEntityInformation: JpaEntityInformation<T, ID>, private var entityManager: EntityManager)
     : SimpleJpaRepository<T, ID>(jpaEntityInformation, entityManager), BaseRepository<T, ID> {
     /**

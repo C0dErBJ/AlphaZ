@@ -10,7 +10,7 @@ import java.util.Objects;
  * @Description:
  */
 @Entity
-@Table(name = "oauth_code", schema = "alphaz", catalog = "")
+@Table(name = "oauth_code", catalog = "")
 public class OauthCodeEntity {
     private String code;
     private byte[] authentication;

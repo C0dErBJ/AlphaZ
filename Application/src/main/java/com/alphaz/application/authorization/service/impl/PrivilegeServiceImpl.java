@@ -17,9 +17,11 @@ import com.alphaz.core.service.LocalizationService;
 import com.alphaz.infrastructure.domain.constant.common.State;
 import com.alphaz.infrastructure.domain.constant.common.Status;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
+import com.alphaz.infrastructure.domain.service.common.BaseServiceImpl;
 import com.alphaz.infrastructure.util.extension.StreamPredicate;
 import com.alphaz.infrastructure.util.valid.ValideHelper;
 import com.querydsl.core.BooleanBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,12 +39,12 @@ import java.util.stream.Collectors;
  */
 @Transactional
 @Service
-public class PrivilegeServiceImpl implements PrivilegeService {
-    @Resource
+public class PrivilegeServiceImpl extends BaseServiceImpl implements PrivilegeService {
+    @Autowired
     private UserRepository userRepository;
-    @Resource
+    @Autowired
     private RMORepository rmodao;
-    @Resource
+    @Autowired
     private RoleRepository roleRepository;
     @Resource
     private LocalizationService localizationService;
@@ -55,7 +57,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
      */
     @Override
     public UserViewModel getUserRole(String username) {
-        List<UserRole> userRoleDTO = this.userRepository.getUserRole(username);
+//        List<UserRole> userRoleDTO = this.userRepository.getUserRole(username);
+        List<UserRole> userRoleDTO = new ArrayList<>();
         UserViewModel userViewModel = new UserViewModel();
         if (ValideHelper.isNullOrEmpty(userRoleDTO)) {
             return null;
@@ -76,13 +79,15 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public MenuOperationModel getMenuOperationByUserid(Long userid) {
-        List<MenuOperation> mo = this.userRepository.getMenuOperationByUserid(userid);
+//        List<MenuOperation> mo = this.userRepository.getMenuOperationByUserid(userid);
+        List<MenuOperation> mo = new ArrayList<>();
         return MOTree(mo);
     }
 
     @Override
     public MenuOperationModel getMenuOperationByRoleid(Long roleid) {
-        List<MenuOperation> mo = this.userRepository.getMenuOperationByRoleid(roleid);
+//        List<MenuOperation> mo = this.userRepository.getMenuOperationByRoleid(roleid);
+        List<MenuOperation> mo = new ArrayList<>();
         return MOTree(mo);
     }
 
@@ -93,7 +98,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel getMenuByUserId(Long userid) {
-        List<MenuOperation> dto = this.userRepository.getMenuOperationByUserid(userid);
+//        List<MenuOperation> dto = this.userRepository.getMenuOperationByUserid(userid);
+        List<MenuOperation> dto = new ArrayList<>();
         //由于getMenuOperationByUserid 方法结果是所有operation和menu对应数据，存在重复menu，这里只需要唯一menu
         List<MenuOperation> sorted = dto.stream().filter(StreamPredicate.distinctByKey(p -> p.menuid))
                 .sorted(Comparator.comparing(a -> a.menuSort)).collect(Collectors.toList());
@@ -121,7 +127,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel getRoles(Long userid) {
-        List<Role> rolelist = userRepository.findRolesByUserid(userid);
+//        List<Role> rolelist = userRepository.findRolesByUserid(userid);
+        List<Role> rolelist = new ArrayList<>();
         ResponseModel<List<Role>> model = new ResponseModel(Status.SUCCESS, null, rolelist);
         return model;
     }
@@ -137,7 +144,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public ResponseModel<AllRoleMenuVIewModel> getAllRoleAndMenuOperation() {
-        List<MenuOperation> dto = this.userRepository.getALLMenuOperation();
+//        List<MenuOperation> dto = this.userRepository.getALLMenuOperation();
+        List<MenuOperation> dto = new ArrayList<>();
         MenuOperationModel menuOperationModel = MOTree(dto);
         AllRoleMenuVIewModel data = new AllRoleMenuVIewModel();
 
@@ -153,7 +161,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
             }}).collect(Collectors.toList()));
         }}));
         data.menuOperation = list;
-        data.roleList = this.userRepository.findALLRolesByState(State.ACTIVE);
+//        data.roleList = this.userRepository.findALLRolesByState(State.ACTIVE);
         ResponseModel model = new ResponseModel(Status.SUCCESS, null, data);
         return model;
     }
@@ -213,7 +221,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     public ResponseModel getRoleById(Long roleid) {
         AlphazRoleEntity role = this.roleRepository.getOne(roleid);
         Role roleDTO = new Role(role.getId(), role.getLabel(), role.getDescription(), role.getEditable());
-        ResponseModel model = new ResponseModel(Status.SUCCESS,null,roleDTO);
+        ResponseModel model = new ResponseModel(Status.SUCCESS, null, roleDTO);
         return model;
     }
 

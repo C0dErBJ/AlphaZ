@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.2.30'
-        bootGralde = '2.0.1.BUILD-SNAPSHOT'
+        bootGralde = '2.0.0.RELEASE'
         flyway = '5.0.7'
     }
     repositories {
@@ -9,9 +9,6 @@ buildscript {
             url "http://122.112.234.252:8888/nexus/content/groups/public/"
         }
 
-        maven {
-            url "https://repo.spring.io/snapshot/"
-        }
         maven {
             url "https://plugins.gradle.org/m2/"
         }

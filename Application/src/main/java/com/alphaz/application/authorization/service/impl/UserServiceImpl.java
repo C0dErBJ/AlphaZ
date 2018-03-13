@@ -7,6 +7,8 @@ import com.alphaz.application.authorization.service.UserService;
 import com.alphaz.core.authorization.entity.AlphazUserEntity;
 import com.alphaz.core.authorization.dao.UserRepository;
 import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
+import com.alphaz.infrastructure.domain.service.common.BaseServiceImpl;
+import com.alphaz.infrastructure.domain.service.filter.annotation.StateFilter;
 import com.alphaz.infrastructure.util.valid.ValideHelper;
 import com.alphaz.infrastructure.domain.constant.common.State;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
@@ -14,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -29,7 +32,8 @@ import java.util.Collection;
  * @author c0der
  */
 @Service
-public class UserServiceImpl implements UserService {
+@Transactional
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
     @Resource
     private UserRepository userRepository;
     @Resource
@@ -61,6 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseModel updateUser(Long userid, UserUpdateModel model) {
         AlphazUserEntity user = this.userRepository.getOne(userid);
+        Object a = new Object();
         if (user == null) {
             return new ResponseModel();
         }

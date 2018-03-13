@@ -17,10 +17,7 @@ dependencies {
             "com.querydsl:querydsl-jpa:${querydslVersion}",
             "org.springframework.boot:spring-boot-starter-test",
             "org.springframework.boot:spring-boot-devtools",
-            "org.springframework.boot:spring-boot-starter-aop"
-
-    )
-    compile(
+            "org.springframework.boot:spring-boot-starter-aop",
             "com.belerweb:pinyin4j:${pinyin4j}",
             "com.squareup.okhttp3:okhttp:${okhttp}",
             "io.netty:netty-all:${netty}",

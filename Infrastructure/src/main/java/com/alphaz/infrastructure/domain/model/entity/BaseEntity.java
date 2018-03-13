@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
  * @since May 19, 2010
  */
 @MappedSuperclass
-@FilterDef(name = "dataStateCondition", parameters = {@ParamDef(name = "state", type = "long")})
-@Filter(name = "dataStateCondition", condition = "state = :ownerRef")
+@FilterDef(name = "dataStateCondition", parameters = {@ParamDef(name = "state", type = "int")})
+@Filter(name = "dataStateCondition", condition = "state = :state")
 public abstract class BaseEntity {
 
     /**
@@ -37,6 +37,7 @@ public abstract class BaseEntity {
      * 更新时间
      */
     private LocalDateTime updateTime;
+
     /**
      * 创建人
      */
@@ -51,7 +52,7 @@ public abstract class BaseEntity {
     }
 
     @Basic
-    @Column(name = "state", nullable = false, columnDefinition = "tinyint default 1", length = 1)
+    @Column(name = "state", nullable = true, columnDefinition = "tinyint default 1", length = 1)
     public State getState() {
         return state;
     }
@@ -61,7 +62,7 @@ public abstract class BaseEntity {
     }
 
     @Basic
-    @Column(name = "create_time", columnDefinition = "datetime default CURRENT_LocalDateTime")
+    @Column(name = "create_time", columnDefinition = "datetime default CURRENT_TIMESTAMP")
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -71,7 +72,7 @@ public abstract class BaseEntity {
     }
 
     @Basic
-    @Column(name = "update_time", columnDefinition = "datetime on update CURRENT_LocalDateTime")
+    @Column(name = "update_time", columnDefinition = "datetime on update CURRENT_TIMESTAMP")
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }

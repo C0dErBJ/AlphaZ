@@ -10,7 +10,7 @@ import java.util.Objects;
  * @Description:
  */
 @Entity
-@Table(name = "oauth_refresh_token", schema = "alphaz", catalog = "")
+@Table(name = "oauth_refresh_token", catalog = "")
 public class OauthRefreshTokenEntity {
     private String tokenId;
     private byte[] token;

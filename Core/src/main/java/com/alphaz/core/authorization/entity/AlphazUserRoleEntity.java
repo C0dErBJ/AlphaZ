@@ -14,7 +14,7 @@ import javax.persistence.*;
  * Description:This is a class of com.alphaz.core.pojo.entity
  */
 @Entity
-@Table(name = "alphaz_user_role", schema = "alphaz", catalog = "")
+@Table(name = "alphaz_user_role", catalog = "")
 public class AlphazUserRoleEntity extends BaseEntity {
     private Long userid;
     private Long roleid;

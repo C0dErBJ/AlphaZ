@@ -6,6 +6,7 @@ import com.alphaz.application.authorization.dto.privilege.MenuOperationModel;
 import com.alphaz.application.authorization.dto.user.UserViewModel;
 import com.alphaz.core.authorization.model.role.Role;
 import com.alphaz.infrastructure.domain.model.common.ResponseModel;
+import com.alphaz.infrastructure.domain.service.common.BaseService;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * Time: 上午10:53
  * Description:This is a class of com.alphaz.core.service
  */
-public interface PrivilegeService {
+public interface PrivilegeService extends BaseService {
     UserViewModel getUserRole(String username);
 
     ResponseModel getUserRoleByUsername(String username);

@@ -13,7 +13,7 @@ import javax.persistence.*;
  * Description:This is a class of com.alphaz.core.pojo.entity
  */
 @Entity
-@Table(name = "alphaz_rmo", schema = "alphaz", catalog = "")
+@Table(name = "alphaz_rmo", catalog = "")
 public class AlphazRMOEntity extends BaseEntity {
     private Long rid;
     private Long moid;

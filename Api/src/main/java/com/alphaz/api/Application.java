@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
  */
 @SpringBootApplication
 @EnableAsync
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableCaching
 @ComponentScan(basePackages = {"com.alphaz"})
 public class Application {
