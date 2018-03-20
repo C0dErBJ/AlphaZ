@@ -1,2 +1,4 @@
 rootProject.name = 'AlphaZ'
-include "Api", "Application", "Core", "Task", "Infrastructure"
+include "Api", "Application", "Core",
+//        "Task",
+        "Infrastructure"

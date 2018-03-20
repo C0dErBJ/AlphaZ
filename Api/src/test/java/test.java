@@ -1,6 +1,6 @@
 import com.alphaz.api.Application;
-import com.alphaz.application.authorization.service.UserService;
-import com.alphaz.core.authorization.entity.AlphazUserEntity;
+import com.alphaz.core.authorization.user.User;
+import com.alphaz.core.authorization.user.UserDomainService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,13 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = Application.class)
 public class test {
     @Resource
-    private UserService userService;
+    private UserDomainService userDomainService;
 
     @Test
     public void test() {
-        String entity = userService.findEmailByUsername("aaa");
-        System.out.println(entity);
+        User aa = new User();
+        aa.setId(5l);
+        userDomainService.changePassword("a", aa);
+        System.out.println("a");
     }
 }

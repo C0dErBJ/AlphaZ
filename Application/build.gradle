@@ -16,9 +16,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf",
             "org.springframework.boot:spring-boot-starter-actuator",
             "net.sourceforge.nekohtml:nekohtml:${neohtmlVersion}",
-            "org.springframework.boot:spring-boot-starter-security",
-            "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE",
-            "org.springframework.security:spring-security-jwt:${springSecurityJwt}",
+
 
     )
 

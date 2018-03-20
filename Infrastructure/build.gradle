@@ -21,6 +21,7 @@ dependencies {
             "com.belerweb:pinyin4j:${pinyin4j}",
             "com.squareup.okhttp3:okhttp:${okhttp}",
             "io.netty:netty-all:${netty}",
+
     )
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"

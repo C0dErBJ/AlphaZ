@@ -16,6 +16,9 @@ dependencies {
 //            "org.springframework.boot:spring-boot-starter-data-redis",
             "org.springframework.boot:spring-boot-starter-cache",
             "mysql:mysql-connector-java",
+            "org.springframework.boot:spring-boot-starter-security",
+            "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE",
+            "org.springframework.security:spring-security-jwt:${springSecurityJwt}",
 //            "io.dubbo.springboot:spring-boot-starter-dubbo:${dubboVersion}",
 
 //            "org.flywaydb:flyway-core:${flywayVersion}"

@@ -1,6 +1,6 @@
 package com.alphaz.application.authorization.config;
 
-import com.alphaz.application.authorization.service.UserService;
+import com.alphaz.core.authorization.user.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
-    private UserService userDetailsService;
+    private UserDomainService userDomainService;
 
     @Value("${security.oauth2.resource.jwt.private-key}")
     private String privateKey;
@@ -81,7 +81,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer configurer) {
         configurer.tokenStore(tokenStore()).accessTokenConverter(tokenEnhancer())
-                .userDetailsService(userDetailsService).userApprovalHandler(userApprovalHandler)
+                .userDetailsService(userDomainService).userApprovalHandler(userApprovalHandler)
                 .authenticationManager(authenticationManager);
     }
 

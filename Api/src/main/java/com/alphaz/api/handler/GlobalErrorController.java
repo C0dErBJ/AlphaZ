@@ -1,9 +1,8 @@
 package com.alphaz.api.handler;
 
-import com.alphaz.infrastructure.domain.constant.common.State;
-import com.alphaz.infrastructure.domain.constant.common.Status;
-import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
-import com.alphaz.infrastructure.domain.model.common.ResponseModel;
+import com.alphaz.infrastructure.constant.Status;
+import com.alphaz.infrastructure.domain.model.ErrorInfo;
+import com.alphaz.infrastructure.domain.model.ResponseModel;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpEntity;

@@ -1,12 +1,11 @@
 package com.alphaz.application.authorization.config;
 
-import com.alphaz.infrastructure.domain.constant.common.Status;
+import com.alphaz.core.authorization.user.UserDomainService;
+import com.alphaz.infrastructure.constant.Status;
 import com.alphaz.infrastructure.util.string.JsonHelper;
-import com.alphaz.application.authorization.service.UserService;
-import com.alphaz.core.service.LocalizationService;
-import com.alphaz.infrastructure.domain.constant.common.State;
-import com.alphaz.infrastructure.domain.model.common.ErrorInfo;
-import com.alphaz.infrastructure.domain.model.common.ResponseModel;
+import com.alphaz.core.localization.LocalizationService;
+import com.alphaz.infrastructure.domain.model.ErrorInfo;
+import com.alphaz.infrastructure.domain.model.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final static String REST_CONTENT_TYPE = "application/json;application/x-www-form-urlencoded;multipart/form-data";
     @Autowired
-    private UserService userService;
+    private UserDomainService userService;
     @Autowired
     private LocalizationService localizationService;
 
