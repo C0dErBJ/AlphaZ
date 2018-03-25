@@ -2,7 +2,6 @@ package com.alphaz.infrastructure.util.net.socket;
 
 
 import com.alphaz.infrastructure.util.net.http.HttpProxy;
-import com.alphaz.infrastructure.util.valid.ValideHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -61,9 +60,9 @@ public class SocketProxy {
      * @return the api response model
      */
     public void DoRequest(HandleResponse callback) {
-        if (ValideHelper.isNullOrEmpty(ps.getUrl())) {
-            return;
-        }
+//        if (ValideHelper.isNullOrEmpty(ps.getUrl())) {
+//            return;
+//        }
         Socket socket = null;
         OutputStream write = null;
         BufferedReader in = null;

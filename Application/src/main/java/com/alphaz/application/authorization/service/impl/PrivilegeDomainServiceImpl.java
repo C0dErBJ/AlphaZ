@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 上午10:53
  * Description:This is a class of com.alphaz.core.service.impl
  */
-@Transactional
-@Service
+
 public class PrivilegeDomainServiceImpl extends DomainServiceImpl implements PrivilegeDomainService {
 //    @Autowired
 //    private UserRepository userRepository;

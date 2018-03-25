@@ -12,7 +12,6 @@ jar {
 dependencies {
     compile project(':Core')
     compile project(':Infrastructure')
-    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf",
             "org.springframework.boot:spring-boot-starter-actuator",
             "net.sourceforge.nekohtml:nekohtml:${neohtmlVersion}",
@@ -20,7 +19,7 @@ dependencies {
 
     )
 
-//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
 }
 //具体查看
 //https://flywaydb.org/documentation/gradle/

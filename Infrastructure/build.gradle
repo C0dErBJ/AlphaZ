@@ -21,8 +21,11 @@ dependencies {
             "com.belerweb:pinyin4j:${pinyin4j}",
             "com.squareup.okhttp3:okhttp:${okhttp}",
             "io.netty:netty-all:${netty}",
+            "org.hibernate.validator:hibernate-validator"
 
     )
+    compile 'org.greenrobot:eventbus:3.1.1'
+
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
 }

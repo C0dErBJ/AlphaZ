@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository
  */
 interface UserRepository : BaseRepository<User, Long> {
 
+    fun findFirstByUsernameAndPassword(username: String, password: String): User?;
+    fun findFirstByUsername(username: String): User?
 }

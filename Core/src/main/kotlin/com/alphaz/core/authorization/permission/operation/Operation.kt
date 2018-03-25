@@ -20,7 +20,7 @@ data class Operation(
         @GeneratedValue(strategy = GenerationType.AUTO)
         var sort: Int,
         var icon: String?
-) : BaseDO<Operation, Long>() {
+) : BaseDO<Operation, Long>(),com.alphaz.infrastructure.domain.Entity {
     constructor() : this(null, null, null, 0, null)
 
 }

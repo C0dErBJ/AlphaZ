@@ -1,7 +1,6 @@
 package com.alphaz.infrastructure.util.net.socket;
 
 import com.alphaz.infrastructure.util.net.http.HttpProxy;
-import com.alphaz.infrastructure.util.valid.ValideHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.bootstrap.Bootstrap;
@@ -59,9 +58,9 @@ public class NettySocketProxy {
      * @return the api response model
      */
     public void DoRequest(ChannelHandler... handlers) {
-        if (ValideHelper.isNullOrEmpty(ps.getUrl())) {
-            return;
-        }
+//        if (ValideHelper.isNullOrEmpty(ps.getUrl())) {
+//            return;
+//        }
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();

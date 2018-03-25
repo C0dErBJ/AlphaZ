@@ -23,7 +23,7 @@ dependencies {
 
 //            "org.flywaydb:flyway-core:${flywayVersion}"
     )
-
+    compile("org.springframework.boot:spring-boot-starter-web")
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
 }
 kapt {

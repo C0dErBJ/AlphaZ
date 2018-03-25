@@ -1,8 +1,6 @@
 package com.alphaz.infrastructure.util.file.importer;
 
 import com.alphaz.infrastructure.util.file.itf.IImporter;
-import com.alphaz.infrastructure.util.io.FileUtil;
-import com.alphaz.infrastructure.util.valid.ValideHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,26 +45,23 @@ public class BaseImporter<T> implements IImporter {
             List<String> str = Arrays.asList(line.split("\\|"));
             HandledData.add(str);
         }
-        if (ValideHelper.isNullOrEmpty(HandledData)) {
-            return false;
-        }
         return true;
     }
 
 
     @Override
     public boolean readFile(boolean isCheckContainer) {
-        SourceData = FileUtil.readFileByline(FilePath);
-        if (ValideHelper.isNullOrEmpty(SourceData)) {
-            return false;
-        }
-        if (isCheckContainer) {
-            if (!SourceData.get(0).trim().equals("BEGIN") || !SourceData.get(SourceData.size()).equals("END")) {
-                return false;
-            } else {
-                SourceData = SourceData.subList(1, SourceData.size() - 1);
-            }
-        }
+//        SourceData = FileUtil.readFileByline(FilePath);
+//        if (ValideHelper.isNullOrEmpty(SourceData)) {
+//            return false;
+//        }
+//        if (isCheckContainer) {
+//            if (!SourceData.get(0).trim().equals("BEGIN") || !SourceData.get(SourceData.size()).equals("END")) {
+//                return false;
+//            } else {
+//                SourceData = SourceData.subList(1, SourceData.size() - 1);
+//            }
+//        }
         return true;
     }
 

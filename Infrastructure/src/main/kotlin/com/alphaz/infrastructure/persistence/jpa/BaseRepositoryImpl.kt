@@ -19,8 +19,7 @@ import javax.persistence.EntityManager
 open class BaseRepositoryImpl<T : BaseDO<*, *>, ID>(jpaEntityInformation: JpaEntityInformation<T, ID>, private var entityManager: EntityManager)
     : SimpleJpaRepository<T, ID>(jpaEntityInformation, entityManager), BaseRepository<T, ID> {
 
-    open val jqf: HibernateQueryFactory
-        @Transactional
+    open override val jqf: HibernateQueryFactory
         get() = HibernateQueryFactory(entityManager.unwrap(Session::class.java))
 
     /**

@@ -27,7 +27,7 @@ data class Role(var roleName: String?,
                         joinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")),
                         inverseJoinColumns = arrayOf(JoinColumn(name = "permission_id", referencedColumnName = "id")))
                 var permissions: MutableSet<Permission>?
-) : BaseDO<Role, Long>() {
+) : BaseDO<Role, Long>(),com.alphaz.infrastructure.domain.Entity {
     constructor() : this(null, null, null, null, 0, true, null, null)
 
 }

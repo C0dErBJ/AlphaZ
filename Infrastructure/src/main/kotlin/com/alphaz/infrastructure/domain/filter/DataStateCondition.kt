@@ -42,10 +42,10 @@ open class DataStateCondition {
 
     }
 
-    @Around(value = " stateFilterClass(stateFilterClass) && baseRepository()")
+    @Around(value = "stateFilterClass(stateFilterClass) && baseRepository()")
     @Throws(Throwable::class)
     fun handleClassFilter(joinPoint: ProceedingJoinPoint, stateFilterClass: StateFilter): Any? {
-        log.info("stateFilter Class")
+        log.info("start stateFilter Class")
         if (!stateFilterClass.enable) {
             log.warn("ignore stateFilter Class")
             val obj = joinPoint.proceed()
@@ -68,14 +68,15 @@ open class DataStateCondition {
         if (session != null) {
             session.disableFilter("dataStateCondition")
         }
+        log.info("end stateFilter Class")
         return obj
 
     }
 
-    @Around(value = " stateFilterMethod(stateFilterMethod) && baseRepository()")
+    @Around(value = "stateFilterMethod(stateFilterMethod) && baseRepository()")
     @Throws(Throwable::class)
     fun handleMethodFilter(joinPoint: ProceedingJoinPoint, stateFilterMethod: StateFilter): Any? {
-        log.info("stateFilter Method")
+        log.info("start stateFilter Method")
         if (!stateFilterMethod.enable) {
             log.warn("ignore stateFilter Method")
             val obj = joinPoint.proceed()
@@ -98,6 +99,7 @@ open class DataStateCondition {
         if (session != null) {
             session.disableFilter("dataStateCondition")
         }
+        log.info("end stateFilter Method")
         return obj
 
     }

@@ -1,11 +1,12 @@
 import com.alphaz.api.Application;
+import com.alphaz.core.authorization.SignInService;
 import com.alphaz.core.authorization.user.User;
-import com.alphaz.core.authorization.user.UserDomainService;
+import com.alphaz.core.authorization.user.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -21,13 +22,17 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = Application.class)
 public class test {
     @Resource
-    private UserDomainService userDomainService;
+    private UserService userService;
+    @Resource
+    private SignInService signInService;
 
     @Test
+    @Transactional
     public void test() {
-        User aa = new User();
-        aa.setId(5l);
-        userDomainService.changePassword("a", aa);
-        System.out.println("a");
+        User aa = userService.findById(1l);
+        userService.changePassword("123456", aa);
+
+        User user = signInService.login("admin", "123456");
+        System.out.println(user);
     }
 }

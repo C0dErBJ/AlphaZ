@@ -22,7 +22,7 @@ data class Permission(var permissionName: String?,
                       var operations: MutableSet<Operation>?,
 
                       @ManyToMany(targetEntity = Role::class, mappedBy = "permissions")
-                      var roles: MutableSet<Role>?) : BaseDO<Permission, Long>() {
+                      var roles: MutableSet<Role>?) : BaseDO<Permission, Long>(),com.alphaz.infrastructure.domain.Entity {
 
     constructor() : this(null, null, null, 0, null, null, null)
 }

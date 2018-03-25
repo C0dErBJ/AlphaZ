@@ -13,8 +13,8 @@ import javax.persistence.Table
 @Table(name = "alphaz_picture", catalog = "")
 data class Picture(var brief: String?,
                    var extension: String?,
-                   var file: ByteArray?,
+                   var dataFile: ByteArray?,
                    var name: String?,
-                   var url: String?) : BaseDO<Picture, Long>() {
+                   var url: String?) : BaseDO<Picture, Long>(),com.alphaz.infrastructure.domain.Entity {
     constructor() : this(null, null, null, null, null)
 }

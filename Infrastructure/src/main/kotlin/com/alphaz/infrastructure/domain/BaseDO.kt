@@ -1,8 +1,6 @@
 package com.alphaz.infrastructure.domain
 
 import com.alphaz.infrastructure.constant.State
-import com.alphaz.infrastructure.exception.NotAValueObjectException
-import com.alphaz.infrastructure.exception.NotAnEntityException
 import org.hibernate.annotations.Filter
 import org.hibernate.annotations.FilterDef
 import org.hibernate.annotations.ParamDef
@@ -20,7 +18,7 @@ import javax.persistence.PrePersist
 @MappedSuperclass
 @FilterDef(name = "dataStateCondition", parameters = arrayOf(ParamDef(name = "state", type = "int")))
 @Filter(name = "dataStateCondition", condition = "state = :state")
-abstract class BaseDO<C : DO<*, *>, T> : DO<C, T> {
+abstract class BaseDO<C : DO<*, *>, ID> : DO<C, ID> {
     override fun equal(other: C): Boolean {
         return this.id == other.id;
     }
@@ -30,7 +28,7 @@ abstract class BaseDO<C : DO<*, *>, T> : DO<C, T> {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: T? = null
+    override var id: ID? = null
 
     /**
      * 逻辑删除
@@ -45,20 +43,20 @@ abstract class BaseDO<C : DO<*, *>, T> : DO<C, T> {
     /**
      * 更新时间
      */
-    @Column(name = "update_time", columnDefinition = "datetime on update CURRENT_TIMESTAMP")
+    @Column(name = "update_time", columnDefinition = "datetime default CURRENT_TIMESTAMP")
     override var updateTime: LocalDateTime? = null
 
     /**
      * 创建人
      */
-    override var createBy: T? = null
+    override var createBy: ID? = null
 
     /**
      * 更新人
      */
-    override var updateBy: T? = null
+    override var updateBy: ID? = null
 
-    override var owner: T? = null
+    override var owner: ID? = null
 
     @Column(name = "version", nullable = false, columnDefinition = "int default 1", length = 1)
     override var version: Int = 0
