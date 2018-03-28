@@ -42,7 +42,7 @@ kapt {
 
 }
 jpaModelgen {
-    jpaModelgenSourcesDir = "src/main/java"
+    jpaModelgenSourcesDir = "build/generated/source/kapt/main"
 }
 idea {
     module {
