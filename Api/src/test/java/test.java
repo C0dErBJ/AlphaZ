@@ -1,5 +1,6 @@
 import com.alphaz.api.Application;
 import com.alphaz.core.authorization.SignInService;
+import com.alphaz.core.authorization.UserSignInEvent;
 import com.alphaz.core.authorization.user.User;
 import com.alphaz.core.authorization.user.UserService;
 import org.junit.Test;
@@ -18,21 +19,20 @@ import javax.annotation.Resource;
  * Time: 下午5:04
  * Description:This is a class of PACKAGE_NAME
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest(classes = Application.class)
 public class test {
-    @Resource
-    private UserService userService;
-    @Resource
-    private SignInService signInService;
-
-    @Test
-    @Transactional
+//    @Resource
+//    private UserService userService;
+//    @Resource
+//    private SignInService signInService;
+//
+//    @Test
+//    @Transactional
     public void test() {
-        User aa = userService.findById(1l);
-        userService.changePassword("123456", aa);
-
-        User user = signInService.login("admin", "123456");
-        System.out.println(user);
+        User user = new User();
+        user.setId(1l);
+        user.setUsername("adf");
+        System.out.println("aa");
     }
 }

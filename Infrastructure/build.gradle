@@ -8,6 +8,8 @@ bootJar {
 jar {
     enabled = true
 }
+apply plugin: 'at.comm_unity.gradle.plugins.jpamodelgen'
+
 dependencies {
 
     compile(
@@ -25,15 +27,22 @@ dependencies {
 
     )
     compile 'org.greenrobot:eventbus:3.1.1'
-
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
 }
 kapt {
     javacOptions {
-        option("-proc:only")
-        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
+//        option("-proc:only")
+//        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
+
+        option("-proc:none")
+        option("-processor", "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
     }
+
+}
+jpaModelgen {
+    jpaModelgenSourcesDir = "src/main/java"
 }
 idea {
     module {

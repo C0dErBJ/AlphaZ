@@ -1,13 +1,11 @@
 package com.alphaz.infrastructure.persistence.jpa
 
 import com.alphaz.infrastructure.constant.State
-import com.alphaz.infrastructure.domain.BaseDO
+import com.alphaz.infrastructure.domain.model.BaseDO
 import com.querydsl.jpa.hibernate.HibernateQueryFactory
 import org.hibernate.Session
 import org.springframework.data.jpa.repository.support.JpaEntityInformation
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository
-import org.springframework.data.repository.NoRepositoryBean
-import org.springframework.transaction.annotation.Transactional
 import javax.persistence.EntityManager
 
 /**
@@ -15,7 +13,6 @@ import javax.persistence.EntityManager
  *@Date: 下午3:58 2018/3/8
  *@Description:
  */
-@NoRepositoryBean
 open class BaseRepositoryImpl<T : BaseDO<*, *>, ID>(jpaEntityInformation: JpaEntityInformation<T, ID>, private var entityManager: EntityManager)
     : SimpleJpaRepository<T, ID>(jpaEntityInformation, entityManager), BaseRepository<T, ID> {
 

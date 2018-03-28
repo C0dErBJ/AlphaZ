@@ -1,5 +1,4 @@
 version '1.0-SNAPSHOT'
-apply plugin: 'kotlin-kapt'
 
 bootJar {
     enabled = false
@@ -23,21 +22,6 @@ dependencies {
 
 //            "org.flywaydb:flyway-core:${flywayVersion}"
     )
-    compile("org.springframework.boot:spring-boot-starter-web")
-    kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
-}
-kapt {
-    javacOptions {
-        option("-proc:only")
-        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
-    }
-}
-idea {
-    module {
-        def kaptMain = file('build/generated/source/kapt/main')
-        sourceDirs += kaptMain
-        generatedSourceDirs += kaptMain
-    }
 }
 
 

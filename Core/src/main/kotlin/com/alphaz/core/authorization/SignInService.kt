@@ -1,10 +1,10 @@
 package com.alphaz.core.authorization
 
 import com.alphaz.core.authorization.user.*
-import com.alphaz.core.shared.service.DomainServiceImpl
+import com.alphaz.core.localization.LocalizationService
+import com.alphaz.infrastructure.domain.service.DomainServiceImpl
 import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

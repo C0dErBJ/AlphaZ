@@ -1,9 +1,7 @@
 package com.alphaz.application.authorization.service.impl;
 
 import com.alphaz.application.authorization.service.PrivilegeDomainService;
-import com.alphaz.core.shared.service.DomainServiceImpl;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.alphaz.infrastructure.domain.service.DomainServiceImpl;
 
 /**
  * ProjectName: alphaz

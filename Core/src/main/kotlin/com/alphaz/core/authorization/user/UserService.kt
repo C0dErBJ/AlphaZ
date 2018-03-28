@@ -1,6 +1,8 @@
 package com.alphaz.core.authorization.user
 
-import com.alphaz.core.shared.service.DomainServiceImpl
+import com.alphaz.core.authorization.permission.Permission
+import com.alphaz.core.localization.LocalizationService
+import com.alphaz.infrastructure.domain.service.DomainServiceImpl
 import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
@@ -21,7 +23,6 @@ import org.springframework.validation.annotation.Validated
 open class UserService : DomainServiceImpl<User, Long, UserRepository>(), UserDetailsService {
     @Autowired
     private lateinit var userPolicy: UserPolicy
-
 
     override fun loadUserByUsername(username: String?): UserDetails? {
         assert(username != null);
@@ -76,5 +77,16 @@ open class UserService : DomainServiceImpl<User, Long, UserRepository>(), UserDe
         this.repository.save(user);
     }
 
-
+    @Transactional
+    open fun userPermissions(user: User): MutableSet<Permission>? {
+        val permissions = mutableSetOf<Permission>();
+        user.roles?.forEach { a ->
+            apply {
+                if (a.permissions != null) {
+                    permissions.addAll(a.permissions!!)
+                }
+            }
+        }
+        return permissions.distinctBy { a -> a.id }.toMutableSet();
+    }
 }

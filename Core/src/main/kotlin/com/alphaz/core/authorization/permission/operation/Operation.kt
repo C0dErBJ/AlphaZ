@@ -1,7 +1,7 @@
 package com.alphaz.core.authorization.permission.operation
 
 import com.alphaz.core.authorization.permission.Permission
-import com.alphaz.infrastructure.domain.BaseDO
+import com.alphaz.infrastructure.domain.model.BaseDO
 import javax.persistence.*
 
 /**
@@ -17,10 +17,8 @@ data class Operation(
         @OneToOne(targetEntity = Permission::class)
         @JoinColumn(name = "permission_id")
         var permission: Permission?,
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        var sort: Int,
         var icon: String?
-) : BaseDO<Operation, Long>(),com.alphaz.infrastructure.domain.Entity {
-    constructor() : this(null, null, null, 0, null)
+) : BaseDO<Operation, Long>(), com.alphaz.infrastructure.domain.Entity {
+    constructor() : this(null, null, null, null)
 
 }

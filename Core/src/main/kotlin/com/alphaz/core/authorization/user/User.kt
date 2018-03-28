@@ -1,11 +1,9 @@
 package com.alphaz.core.authorization.user
 
 import com.alphaz.core.authorization.role.Role
-import com.alphaz.infrastructure.domain.BaseDO
-import org.springframework.data.domain.DomainEvents
+import com.alphaz.infrastructure.domain.model.BaseDO
 import java.time.LocalDateTime
 import javax.persistence.*
-import javax.validation.constraints.Max
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -59,5 +57,29 @@ data class User(
     fun unlock() {
         this.isAccountNonLocked = true;
         this.loginFailCount = 0;
+    }
+
+    fun addRole(role: Role) {
+        if (this.roles == null) {
+            this.roles = mutableSetOf(role);
+        } else {
+            this.roles!!.add(role)
+        }
+    }
+
+    fun addRoles(roles: MutableSet<Role>) {
+        if (this.roles == null) {
+            this.roles = roles;
+        } else {
+            this.roles!!.addAll(roles)
+        }
+    }
+
+    fun removeRole(role: Role) {
+        this.roles?.removeIf { a -> a.sameAs(role) }
+    }
+
+    fun removeAllRoles() {
+        this.roles = null;
     }
 }

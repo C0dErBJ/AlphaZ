@@ -5,6 +5,7 @@ import com.alphaz.core.localization.LocalizationService
 import com.alphaz.infrastructure.constant.Status
 import com.alphaz.infrastructure.domain.model.ErrorInfo
 import com.alphaz.infrastructure.domain.model.ResponseModel
+import com.alphaz.infrastructure.domain.service.filter.UserSignInFilter
 import com.alphaz.infrastructure.util.JsonHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -56,6 +57,7 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     open override fun configure(http: HttpSecurity) {
         // 此处配置服务资源过滤，基于权限
         // Warn 此处貌似有个坑，禁止匿名访问后会影响到formlogin使之不能正常使用，会影响到不能获取principle，是不是安全的机制还未确定
+        http.addFilterBefore(UserSignInFilter(), UsernamePasswordAuthenticationFilter::class.java);
         http.formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .successHandler { _, response, _ ->

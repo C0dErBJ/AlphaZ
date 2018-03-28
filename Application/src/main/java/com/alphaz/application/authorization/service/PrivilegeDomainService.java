@@ -1,6 +1,6 @@
 package com.alphaz.application.authorization.service;
 
-import com.alphaz.core.shared.service.DomainService;
+import com.alphaz.infrastructure.domain.service.DomainService;
 
 /**
  * ProjectName: alphaz

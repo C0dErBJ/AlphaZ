@@ -1,6 +1,5 @@
 package com.alphaz.core.localization
 
-import com.alphaz.core.shared.service.DomainServiceImpl
 import org.slf4j.LoggerFactory
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
@@ -14,26 +13,26 @@ import javax.annotation.Resource
  *@Description:
  */
 @Service
-open class LocalizationService {
+open class LocalizationService : com.alphaz.infrastructure.domain.service.common.LocalizationService {
 
     private val logger = LoggerFactory.getLogger(LocalizationService::class.java)!!
 
     @Resource
     private lateinit var messageSource: MessageSource
 
-    open fun getMessage(code: String): String {
+    override fun getMessage(code: String): String {
         return getMessage(code, null, LocaleContextHolder.getLocale())
     }
 
-    open fun getMessage(code: String, locale: Locale): String {
+    override fun getMessage(code: String, locale: Locale): String {
         return getMessage(code, null, locale)
     }
 
-    open fun getMessage(code: String, args: Array<String>): String {
+    override fun getMessage(code: String, args: Array<String>): String {
         return getMessage(code, args, LocaleContextHolder.getLocale())
     }
 
-    open fun getMessage(code: String, args: Array<String>?, locale: Locale): String {
+    override fun getMessage(code: String, args: Array<String>?, locale: Locale): String {
         try {
             val message = messageSource.getMessage(code, args, locale);
             return message;

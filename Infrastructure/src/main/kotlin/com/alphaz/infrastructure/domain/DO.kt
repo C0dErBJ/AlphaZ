@@ -16,7 +16,7 @@ interface DO<C, ID> {
     /**
      * entity在ddd中用唯一标识区别
      */
-    fun equal(other: C): Boolean
+    fun sameAs(other: C): Boolean
 
     /**
      * 目前主键泛型只能是nullable，kotlin不支持new T()
@@ -46,4 +46,6 @@ interface DO<C, ID> {
     var owner: ID?
 
     var version: Int
+
+    var sort: Int
 }

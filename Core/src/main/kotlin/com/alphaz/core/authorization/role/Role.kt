@@ -2,7 +2,7 @@ package com.alphaz.core.authorization.role
 
 import com.alphaz.core.authorization.permission.Permission
 import com.alphaz.core.authorization.user.User
-import com.alphaz.infrastructure.domain.BaseDO
+import com.alphaz.infrastructure.domain.model.BaseDO
 import javax.persistence.*
 
 /**
@@ -16,8 +16,6 @@ data class Role(var roleName: String?,
                 var label: String?,
                 var permissionLevel: String?,
                 var description: String?,
-                @GeneratedValue(strategy = GenerationType.AUTO)
-                var sort: Int,
                 var isEditable: Boolean,
                 @ManyToMany(targetEntity = User::class)
                 var user: MutableSet<User>?,
@@ -27,7 +25,30 @@ data class Role(var roleName: String?,
                         joinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")),
                         inverseJoinColumns = arrayOf(JoinColumn(name = "permission_id", referencedColumnName = "id")))
                 var permissions: MutableSet<Permission>?
-) : BaseDO<Role, Long>(),com.alphaz.infrastructure.domain.Entity {
-    constructor() : this(null, null, null, null, 0, true, null, null)
+) : BaseDO<Role, Long>(), com.alphaz.infrastructure.domain.Entity {
+    constructor() : this(null, null, null, null,  true, null, null)
 
+    fun addPermission(permission: Permission) {
+        if (this.permissions == null) {
+            this.permissions = mutableSetOf(permission)
+        } else {
+            this.permissions!!.add(permission)
+        }
+    }
+
+    fun addPermissions(permissions: MutableSet<Permission>) {
+        if (this.permissions == null) {
+            this.permissions = permissions
+        } else {
+            this.permissions!!.addAll(permissions)
+        }
+    }
+
+    fun removePermission(permission: Permission) {
+        this.permissions?.removeIf { a -> a.sameAs(permission) }
+    }
+
+    fun removeAllPermissions() {
+        this.permissions = null;
+    }
 }

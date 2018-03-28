@@ -1,6 +1,6 @@
 package com.alphaz.core.file
 
-import com.alphaz.infrastructure.domain.BaseDO
+import com.alphaz.infrastructure.domain.model.BaseDO
 import javax.persistence.Entity
 import javax.persistence.Table
 

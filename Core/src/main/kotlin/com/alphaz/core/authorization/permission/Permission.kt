@@ -2,7 +2,7 @@ package com.alphaz.core.authorization.permission
 
 import com.alphaz.core.authorization.permission.operation.Operation
 import com.alphaz.core.authorization.role.Role
-import com.alphaz.infrastructure.domain.BaseDO
+import com.alphaz.infrastructure.domain.model.TreeEntity.BaseTreeEntity
 import javax.persistence.*
 
 /**
@@ -14,15 +14,36 @@ import javax.persistence.*
 @Table(name = "alphaz_permission", catalog = "")
 data class Permission(var permissionName: String?,
                       var label: String?,
-                      var parentid: Long?,
-                      @GeneratedValue(strategy = GenerationType.AUTO)
-                      var sort: Int,
                       var icon: String?,
                       @OneToMany(targetEntity = Operation::class, mappedBy = "permission")
                       var operations: MutableSet<Operation>?,
-
                       @ManyToMany(targetEntity = Role::class, mappedBy = "permissions")
-                      var roles: MutableSet<Role>?) : BaseDO<Permission, Long>(),com.alphaz.infrastructure.domain.Entity {
+                      var roles: MutableSet<Role>?) : BaseTreeEntity<Permission, Long>(), com.alphaz.infrastructure.domain.Entity {
 
-    constructor() : this(null, null, null, 0, null, null, null)
+    constructor() : this(null, null, null, null, null)
+
+    fun addOperation(operation: Operation) {
+        if (this.operations == null) {
+            this.operations = mutableSetOf(operation)
+        } else {
+            this.operations!!.add(operation)
+        }
+    }
+
+    fun addOperations(operations: MutableSet<Operation>) {
+        if (this.operations == null) {
+            this.operations = operations;
+        } else {
+            this.operations!!.addAll(operations);
+        }
+    }
+
+    fun removeOperation(operation: Operation) {
+        this.operations?.removeIf { a -> a.sameAs(operation) }
+    }
+
+    fun removeAllOperaions() {
+        this.operations = null;
+    }
+
 }
