@@ -1,16 +1,10 @@
 package com.alphaz.core.authorization.permission
 
-import com.alphaz.core.authorization.permission.operation.Operation
-import com.alphaz.infrastructure.domain.ValueObject
+import com.alphaz.infrastructure.domain.model.treeentity.TreeValue
 
 /**
  *@Author: c0der
- *@Date: 下午1:27 2018/3/28
+ *@Date: 下午10:57 2018/3/29
  *@Description:
  */
-data class PermissionTree(val childPermissionTree: MutableSet<PermissionTree>,
-                          val label: String,
-                          val icon: String?,
-                          val operation: MutableSet<Operation>) : ValueObject {
-
-}
+class PermissionTree : TreeValue<Permission>()

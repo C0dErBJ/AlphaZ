@@ -1,5 +1,20 @@
 version '1.0-SNAPSHOT'
-
+buildscript {
+    repositories {
+        maven {
+            url "http://122.112.234.252:8888/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.1"
+    }
+}
+apply plugin: 'kotlin-kapt'
+apply plugin: 'at.comm_unity.gradle.plugins.jpamodelgen'
 bootJar {
     enabled = false
 }
@@ -22,6 +37,26 @@ dependencies {
 
 //            "org.flywaydb:flyway-core:${flywayVersion}"
     )
+    compile "com.querydsl:querydsl-apt:${querydslVersion}"
+    kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
+}
+kapt {
+    javacOptions {
+        option("-proc:only")
+//        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
+
+    }
+
+}
+jpaModelgen {
+    jpaModelgenSourcesDir = "build/redirect/to/nowhere"
+}
+idea {
+    module {
+        def kaptMain = file('build/generated/source/kapt/main')
+        sourceDirs += kaptMain
+        generatedSourceDirs += kaptMain
+    }
 }
 
 

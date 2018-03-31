@@ -20,14 +20,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
  *@Date: 下午1:24 2018/3/20
  *@Description:
  */
-@Configuration
-@EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+//@EnableResourceServer
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 open class ResourceServerConfig : ResourceServerConfigurerAdapter() {
     @Value("\${resource.id:spring-boot-application}")
     private val resourceId: String? = null
-    @Value("\${security.oauth2.resource.jwt.private-key}")
-    private val privateKey: String? = null
     @Autowired
     private val tokenEnhancer: JwtAccessTokenConverter? = null
 
@@ -51,7 +49,7 @@ open class ResourceServerConfig : ResourceServerConfigurerAdapter() {
 
     @Throws(Exception::class)
     open override fun configure(http: HttpSecurity) {
-        http.authorizeRequests().anyRequest().authenticated().antMatchers("/favicon.ico",
+        http.authorizeRequests().antMatchers("/favicon.ico",
                 "/system/**",
                 "/error",
                 "/image",
@@ -60,7 +58,8 @@ open class ResourceServerConfig : ResourceServerConfigurerAdapter() {
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/swagger-resources/**",
-                "/webjars/**"
+                "/webjars/**",
+                "/login"
         ).permitAll()
     }
 }

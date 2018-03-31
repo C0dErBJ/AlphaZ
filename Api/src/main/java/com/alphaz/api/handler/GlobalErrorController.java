@@ -26,45 +26,49 @@ import java.util.Map;
  * Time: 下午7:15
  * Description:This is a class of com.alphaz.controller
  */
-@Controller
-public class GlobalErrorController implements ErrorController {
+//@Controller
+public class GlobalErrorController
+//        implements ErrorController
+{
 
-    private static final String PATH = "/error";
+//    private static final String PATH = "/error";
+//
+//    @RequestMapping(value = PATH, produces = "text/html")
+//    public ModelAndView error_html(HttpServletRequest request) {
+//        Map<String, Object> errors = new DefaultErrorAttributes().getErrorAttributes((WebRequest) request, true);
+//        ModelAndView mav;
+//        switch (errors.get("status").toString()) {
+//            case "404":
+//                mav = new ModelAndView("system/404");
+//                break;
+//            case "403":
+//                mav = new ModelAndView("system/403");
+//                break;
+//            case "500":
+//                mav = new ModelAndView("system/500");
+//                break;
+//            default:
+//                mav = new ModelAndView("system/500");
+//                break;
+//        }
+//        mav.addObject("message", errors.get("message"));
+//        return mav;
+//    }
+//
+//    @ResponseBody
+//    @RequestMapping(value = PATH)
+//    public HttpEntity<ResponseModel> error(HttpServletRequest request) {
+//        Map<String, Object> errors = new DefaultErrorAttributes().getErrorAttributes((WebRequest) request, true);
+//        ResponseModel<Object> model = new ResponseModel<>(Status.FAILED,
+//                new ErrorInfo(errors.get("message").toString(), errors.get("errors")),
+//                null, errors.get("status").toString());
+//        return new ResponseEntity<>(model, HttpStatus.valueOf(Integer.valueOf(model.getHttpStatus())));
+//    }
+//
+//    @Override
+//    public String getErrorPath() {
+//        return PATH;
+//    }
 
-    @RequestMapping(value = PATH, produces = "text/html")
-    public ModelAndView error_html(HttpServletRequest request) {
-        Map<String, Object> errors = new DefaultErrorAttributes().getErrorAttributes((WebRequest) new ServletRequestAttributes(request), true);
-        ModelAndView mav;
-        switch (errors.get("status").toString()) {
-            case "404":
-                mav = new ModelAndView("system/404");
-                break;
-            case "403":
-                mav = new ModelAndView("system/403");
-                break;
-            case "500":
-                mav = new ModelAndView("system/500");
-                break;
-            default:
-                mav = new ModelAndView("system/500");
-                break;
-        }
-        mav.addObject("message", errors.get("message"));
-        return mav;
-    }
 
-    @ResponseBody
-    @RequestMapping(value = PATH)
-    public HttpEntity<ResponseModel> error(HttpServletRequest request) {
-        Map<String, Object> errors = new DefaultErrorAttributes().getErrorAttributes((WebRequest) new ServletRequestAttributes(request), true);
-        ResponseModel<Object> model = new ResponseModel<>(Status.FAILED,
-                new ErrorInfo(errors.get("message").toString(), errors.get("errors")),
-                null, errors.get("status").toString());
-        return new ResponseEntity<>(model, HttpStatus.valueOf(Integer.valueOf(model.getHttpStatus())));
-    }
-
-    @Override
-    public String getErrorPath() {
-        return PATH;
-    }
 }

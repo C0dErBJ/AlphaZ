@@ -11,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean
  *@Description:
  */
 @NoRepositoryBean
-interface BaseRepository<T : BaseDO<*, *>, ID> : JpaRepository<T, ID> {
+interface BaseRepository<T : BaseDO<T, ID>, ID> : JpaRepository<T, ID> {
     val jqf: HibernateQueryFactory;
 
     fun removeById(id: ID);

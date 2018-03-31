@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 /**
@@ -48,16 +49,14 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/swagger-resources/**",
-                "/webjars/**",
-                "/privilege"
+                "/webjars/**"
         )
     }
-
     @Throws(Exception::class)
     open override fun configure(http: HttpSecurity) {
         // 此处配置服务资源过滤，基于权限
         // Warn 此处貌似有个坑，禁止匿名访问后会影响到formlogin使之不能正常使用，会影响到不能获取principle，是不是安全的机制还未确定
-        http.addFilterBefore(UserSignInFilter(), UsernamePasswordAuthenticationFilter::class.java);
+//        http.addFilterBefore(UserSignInFilter(), UsernamePasswordAuthenticationFilter::class.java);
         http.formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .successHandler { _, response, _ ->

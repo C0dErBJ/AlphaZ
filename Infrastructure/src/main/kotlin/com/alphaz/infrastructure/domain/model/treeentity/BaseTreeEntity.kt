@@ -1,4 +1,4 @@
-package com.alphaz.infrastructure.domain.model.TreeEntity
+package com.alphaz.infrastructure.domain.model.treeentity
 
 import com.alphaz.infrastructure.domain.model.BaseDO
 import com.alphaz.infrastructure.domain.DO
@@ -10,9 +10,14 @@ import javax.persistence.*
  *@Description:
  */
 @MappedSuperclass
-abstract class BaseTreeEntity<C : DO<*, *>, ID> : BaseDO<C, ID>() {
-    var root: ID? = null;
-    var parentId: ID? = null;
+abstract class BaseTreeEntity<C : DO<C, Long>> : BaseDO<C, Long>() {
+
+    companion object {
+        val SEPERATOR = '-';
+    }
+
+    var root: Long? = null;
+    var parentId: Long? = null;
     var code: String? = null;
     var layer: Int = 0;
 }

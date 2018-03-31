@@ -13,7 +13,7 @@ import javax.persistence.EntityManager
  *@Date: 下午3:58 2018/3/8
  *@Description:
  */
-open class BaseRepositoryImpl<T : BaseDO<*, *>, ID>(jpaEntityInformation: JpaEntityInformation<T, ID>, private var entityManager: EntityManager)
+open class BaseRepositoryImpl<T : BaseDO<T, ID>, ID>(jpaEntityInformation: JpaEntityInformation<T, ID>, private var entityManager: EntityManager)
     : SimpleJpaRepository<T, ID>(jpaEntityInformation, entityManager), BaseRepository<T, ID> {
 
     open override val jqf: HibernateQueryFactory

@@ -23,6 +23,7 @@ import java.net.UnknownHostException;
 @EnableCaching
 @ComponentScan(basePackages = {"com.alphaz"})
 public class Application {
+    public final  static  String a="a";
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

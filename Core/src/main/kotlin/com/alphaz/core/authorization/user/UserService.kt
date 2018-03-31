@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.annotation.Validated
@@ -26,38 +28,13 @@ open class UserService : DomainServiceImpl<User, Long, UserRepository>(), UserDe
 
     override fun loadUserByUsername(username: String?): UserDetails? {
         assert(username != null);
-        return repository.findFirstByUsername(username!!)?.let<User?, UserDetails> { it ->
-            object : UserDetails {
-                override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
-                    return null;
-                }
-
-                override fun isEnabled(): Boolean {
-                    return it!!.isEnabled
-                }
-
-                override fun getUsername(): String {
-                    return it?.username!!
-                }
-
-                override fun isCredentialsNonExpired(): Boolean {
-                    return it?.isCredentialsNonExpired!!
-                }
-
-                override fun getPassword(): String {
-                    return it?.password!!
-                }
-
-                override fun isAccountNonExpired(): Boolean {
-                    return it?.isAccountNonExpired!!
-                }
-
-                override fun isAccountNonLocked(): Boolean {
-                    return it?.isAccountNonLocked!!
-                }
-
-            }
-        };
+        val matchedUser = repository.findFirstByUsername(username!!) ?: throw UsernameNotFoundException("UserNotFound")
+        return org.springframework.security.core.userdetails.User(matchedUser.username,
+                matchedUser.password, matchedUser.isEnabled,
+                matchedUser.isAccountNonExpired,
+                matchedUser.isCredentialsNonExpired,
+                matchedUser.isAccountNonLocked,
+                mutableListOf())
     }
 
     open fun changePassword(newPassword: String, user: User) {

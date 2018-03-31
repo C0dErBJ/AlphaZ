@@ -1,5 +1,19 @@
 version '1.0-SNAPSHOT'
-apply plugin: 'kotlin-kapt'
+
+buildscript {
+    repositories {
+        maven {
+            url "http://122.112.234.252:8888/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.1"
+    }
+}
 
 bootJar {
     enabled = false
@@ -9,6 +23,7 @@ jar {
     enabled = true
 }
 apply plugin: 'at.comm_unity.gradle.plugins.jpamodelgen'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
 
@@ -33,16 +48,14 @@ dependencies {
 }
 kapt {
     javacOptions {
-//        option("-proc:only")
+        option("-proc:only")
 //        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
 
-        option("-proc:none")
-        option("-processor", "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
     }
 
 }
 jpaModelgen {
-    jpaModelgenSourcesDir = "build/generated/source/kapt/main"
+    jpaModelgenSourcesDir = "build/redirect/to/nowhere"
 }
 idea {
     module {

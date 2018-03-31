@@ -31,7 +31,7 @@ data class UserSignInRecord(
         var loginTime: LocalDateTime?
 
 
-) : BaseDO<User, Long>(), com.alphaz.infrastructure.domain.Entity {
+) : BaseDO<UserSignInRecord, Long>(), com.alphaz.infrastructure.domain.Entity {
     constructor() : this(null, null, null, null)
 
 }

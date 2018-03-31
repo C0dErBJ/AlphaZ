@@ -5,6 +5,7 @@ import com.alphaz.infrastructure.domain.Policy
 import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.apache.commons.codec.binary.Hex
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.security.MessageDigest
 
@@ -19,6 +20,10 @@ open class UserPolicy : Policy<User> {
     private lateinit var l: LocalizationService;
     @Autowired
     private lateinit var userRepository: UserRepository
+
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
+
 
     open fun passwordStrength(t: User): Boolean {
         assert(t.password != null) {
@@ -71,8 +76,9 @@ open class UserPolicy : Policy<User> {
      * 密码加密
      */
     open fun encode(password: String): String {
-        val messageDigest = MessageDigest.getInstance("SHA-256")
-        messageDigest.update(password.toByteArray());
-        return Hex.encodeHexString(messageDigest.digest())
+//        val messageDigest = MessageDigest.getInstance("SHA-256")
+//        messageDigest.update(password.toByteArray());
+//        return Hex.encodeHexString(messageDigest.digest())
+        return passwordEncoder.encode(password);
     }
 }

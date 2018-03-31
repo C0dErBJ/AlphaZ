@@ -22,17 +22,16 @@ import javax.annotation.Resource;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringBootTest(classes = Application.class)
 public class test {
-//    @Resource
-//    private UserService userService;
-//    @Resource
-//    private SignInService signInService;
-//
-//    @Test
+    @Resource
+    private UserService userService;
+
+    @Test
 //    @Transactional
     public void test() {
         User user = new User();
         user.setId(1l);
         user.setUsername("adf");
+        userService.changePassword("123456", user);
         System.out.println("aa");
     }
 }

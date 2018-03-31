@@ -2,7 +2,7 @@ package com.alphaz.core.authorization.permission
 
 import com.alphaz.core.authorization.permission.operation.Operation
 import com.alphaz.core.authorization.role.Role
-import com.alphaz.infrastructure.domain.model.TreeEntity.BaseTreeEntity
+import com.alphaz.infrastructure.domain.model.treeentity.BaseTreeEntity
 import javax.persistence.*
 
 /**
@@ -18,7 +18,7 @@ data class Permission(var permissionName: String?,
                       @OneToMany(targetEntity = Operation::class, mappedBy = "permission")
                       var operations: MutableSet<Operation>?,
                       @ManyToMany(targetEntity = Role::class, mappedBy = "permissions")
-                      var roles: MutableSet<Role>?) : BaseTreeEntity<Permission, Long>(), com.alphaz.infrastructure.domain.Entity {
+                      var roles: MutableSet<Role>?) : BaseTreeEntity<Permission>(), com.alphaz.infrastructure.domain.Entity {
 
     constructor() : this(null, null, null, null, null)
 

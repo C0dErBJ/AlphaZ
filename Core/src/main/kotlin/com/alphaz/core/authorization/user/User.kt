@@ -47,8 +47,8 @@ data class User(
         var isTwoFactorEnabled: Boolean,
         @ManyToMany(targetEntity = Role::class)
         @JoinTable(name = "alphaz_user_role",
-                joinColumns = arrayOf(JoinColumn(name = "user_id", referencedColumnName = "id")),
-                inverseJoinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")))
+                joinColumns = [(JoinColumn(name = "user_id", referencedColumnName = "id"))],
+                inverseJoinColumns = [(JoinColumn(name = "role_id", referencedColumnName = "id"))])
         var roles: MutableSet<Role>?
 ) : BaseDO<User, Long>(), com.alphaz.infrastructure.domain.Entity {
     constructor() : this(null, null, null, null, null, 0, true, true, true, true, null, true, null)

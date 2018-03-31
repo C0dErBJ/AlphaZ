@@ -18,7 +18,7 @@ import kotlin.jvm.Transient
 @MappedSuperclass
 @FilterDef(name = "dataStateCondition", parameters = arrayOf(ParamDef(name = "state", type = "int")))
 @Filter(name = "dataStateCondition", condition = "state = :state")
-abstract class BaseDO<C : DO<*, *>, ID> : DO<C, ID> {
+abstract class BaseDO<C : DO<C, ID>, ID> : DO<C, ID> {
     override fun sameAs(other: C): Boolean {
         return this.id == other.id;
     }
@@ -63,7 +63,7 @@ abstract class BaseDO<C : DO<*, *>, ID> : DO<C, ID> {
     @Version
     @Transient
     var lock: Int? = null
-    @Column(name = "sort", columnDefinition = "int default 0 not null  AUTO_INCREMENT")
+    @Column(name = "sort", columnDefinition = "int default 0")
     override var sort: Int = 0
 
 }
