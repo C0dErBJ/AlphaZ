@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration
  */
 @Configuration
 open class EventConfig {
+    @Autowired
+    private lateinit var userSignInEvent: UserSignInEvent;
+
     @Bean
     open fun event(): EventBus {
         return EventBus.builder().build();
@@ -20,7 +23,7 @@ open class EventConfig {
 
     @Bean
     open fun eventRegister(@Autowired eventBus: EventBus): Boolean {
-        eventBus.register(UserSignInEvent());
+        eventBus.register(userSignInEvent);
         return true;
     }
 }

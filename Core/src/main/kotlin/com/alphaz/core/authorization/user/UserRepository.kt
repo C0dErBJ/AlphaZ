@@ -1,7 +1,6 @@
 package com.alphaz.core.authorization.user
 
 import com.alphaz.infrastructure.persistence.jpa.BaseRepository
-import org.springframework.stereotype.Repository
 
 /**
  *@Author: c0der

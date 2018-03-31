@@ -62,7 +62,7 @@ abstract class BaseDO<C : DO<C, ID>, ID> : DO<C, ID> {
 
     @Version
     @Transient
-    var lock: Int? = null
+    var hibernateLock: Int? = null
     @Column(name = "sort", columnDefinition = "int default 0")
     override var sort: Int = 0
 

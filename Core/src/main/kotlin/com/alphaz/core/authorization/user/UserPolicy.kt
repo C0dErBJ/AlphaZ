@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.security.MessageDigest
+import javax.servlet.*
 
 /**
  *@Author: c0der
@@ -46,7 +47,7 @@ open class UserPolicy : Policy<User> {
     /**
      * 注册验证
      */
-    open fun userSignUpValid(t: User): Boolean {
+    open fun userSignUpPolicy(t: User): Boolean {
         assert(t.username != null) {
             l.getMessage("UsernameShouldBePresent")
         }
@@ -60,15 +61,14 @@ open class UserPolicy : Policy<User> {
     /**
      * 登录验证
      */
-    open fun userSignInValid(t: User): Boolean {
+    open fun userSignInPolicy(t: User): Boolean {
 
-        if (t.loginFailCount!! > 5) {
-            t.isAccountNonLocked = false;
+        if (t.loginFailCount > 5) {
+            t.lock()
+            userRepository.save(t);
+            return false;
         }
-        if (!t.isAccountNonLocked) {
-            throw BusinessErrorException(l.getMessage("UserHasBeenLocked"))
-        }
-        userRepository.save(t);
+
         return true;
     }
 
@@ -81,4 +81,5 @@ open class UserPolicy : Policy<User> {
 //        return Hex.encodeHexString(messageDigest.digest())
         return passwordEncoder.encode(password);
     }
+
 }

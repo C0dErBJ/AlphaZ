@@ -59,6 +59,11 @@ data class User(
         this.loginFailCount = 0;
     }
 
+    fun lock() {
+        this.isAccountNonLocked = false;
+    }
+
+
     fun addRole(role: Role) {
         if (this.roles == null) {
             this.roles = mutableSetOf(role);

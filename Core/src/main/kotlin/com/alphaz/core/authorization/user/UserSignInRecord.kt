@@ -14,8 +14,6 @@ import javax.validation.constraints.Size
 @Entity
 @Table(name = "alphaz_user_sign_record", catalog = "")
 data class UserSignInRecord(
-        @field:Size(max = 256)
-        @field:NotNull
         var userId: Long?,
 
         @field:Size(max = 256)
@@ -23,12 +21,12 @@ data class UserSignInRecord(
         var username: String?,
 
         @field:Size(max = 512)
-        @field:NotNull
         var clientIp: String?,
 
         @field:NotNull
-        @field:Size(max = 512)
-        var loginTime: LocalDateTime?
+        var loginTime: LocalDateTime?,
+
+        val isSuccess: Boolean = true
 
 
 ) : BaseDO<UserSignInRecord, Long>(), com.alphaz.infrastructure.domain.Entity {

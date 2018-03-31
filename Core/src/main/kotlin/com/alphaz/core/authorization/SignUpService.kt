@@ -22,7 +22,7 @@ open class SignUpService : DomainServiceImpl<User, Long, UserRepository>() {
     private lateinit var userPolicy: UserPolicy;
 
     open fun register(user: User): User {
-        userPolicy.userSignInValid(user);
+        userPolicy.userSignInPolicy(user);
         return this.repository.save(user);
     }
 }
