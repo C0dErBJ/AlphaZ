@@ -1,12 +1,12 @@
-package com.alphaz.core.config
+package com.alphaz.application.config
 
+import com.alphaz.core.authorization.user.UserPolicy
 import com.alphaz.core.authorization.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer
@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer
 import org.springframework.security.oauth2.provider.ClientDetailsService
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler
-import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory
 import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
@@ -29,32 +28,31 @@ import javax.sql.DataSource
 @Configuration
 @EnableAuthorizationServer
 open class AuthorizationServerConfig : AuthorizationServerConfigurerAdapter() {
-    @Autowired
-    private val userService: UserService? = null
+
 
     @Value("\${security.oauth2.resource.jwt.private-key}")
-    private val privateKey: String? = null
+    private lateinit var privateKey: String
     @Value("\${security.oauth2.resource.jwt.public-key}")
-    private val publicKey: String? = null
+    private lateinit var publicKey: String
 
     @Value("\${resource.id:spring-boot-application}")
-    private val resourceId: String? = null
+    private lateinit var resourceId: String
 
     @Autowired
-    private val dataSource: DataSource? = null
+    private lateinit var userService: UserService
 
     @Autowired
-    private val userApprovalHandler: UserApprovalHandler? = null
+    private lateinit var dataSource: DataSource
 
     @Autowired
-    private val clientDetailsService: ClientDetailsService? = null
+    private lateinit var clientDetailsService: ClientDetailsService
 
     @Autowired
-    private val authenticationManager: AuthenticationManager? = null
-    @Autowired
-    private val passwordEncoder: PasswordEncoder? = null
+    private lateinit var authenticationManager: AuthenticationManager
 
-    @Bean
+    @Autowired
+    private lateinit var userPolicy: UserPolicy
+
     @Autowired
     open fun userApprovalHandler(tokenStore: TokenStore): TokenStoreUserApprovalHandler {
         val handler = TokenStoreUserApprovalHandler()
@@ -67,7 +65,7 @@ open class AuthorizationServerConfig : AuthorizationServerConfigurerAdapter() {
     @Bean
     open fun tokenEnhancer(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
-        converter.setSigningKey(privateKey!!)
+        converter.setSigningKey(privateKey)
         converter.setVerifierKey(publicKey)
         return converter
     }
@@ -77,22 +75,24 @@ open class AuthorizationServerConfig : AuthorizationServerConfigurerAdapter() {
         return JwtTokenStore(tokenEnhancer())
     }
 
-    open override fun configure(configurer: AuthorizationServerEndpointsConfigurer?) {
-        configurer!!.tokenStore(tokenStore()).accessTokenConverter(tokenEnhancer())
-                .userDetailsService(userService).userApprovalHandler(userApprovalHandler)
+    override fun configure(configurer: AuthorizationServerEndpointsConfigurer) {
+        configurer.tokenStore(tokenStore()).accessTokenConverter(tokenEnhancer())
+                .userDetailsService(userService).userApprovalHandler(userApprovalHandler(tokenStore()))
                 .authenticationManager(authenticationManager)
     }
 
-    open override fun configure(oauthServer: AuthorizationServerSecurityConfigurer?) {
-        oauthServer!!.tokenKeyAccess("permitAll()")
+    override fun configure(oauthServer: AuthorizationServerSecurityConfigurer) {
+        oauthServer.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients() // isAuthenticated()
     }
 
     @Throws(Exception::class)
-    open override fun configure(clients: ClientDetailsServiceConfigurer?) {
+    override fun configure(clients: ClientDetailsServiceConfigurer) {
         //todo 持久化到数据库
-        clients!!.jdbc(dataSource).passwordEncoder(passwordEncoder)
+        clients.jdbc(dataSource).passwordEncoder(userPolicy.passwordEncoder)
 
     }
+
+
 }

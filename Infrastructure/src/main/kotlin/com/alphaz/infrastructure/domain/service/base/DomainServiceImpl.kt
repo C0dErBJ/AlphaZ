@@ -1,11 +1,14 @@
-package com.alphaz.infrastructure.domain.service
+package com.alphaz.infrastructure.domain.service.base
 
-import com.alphaz.infrastructure.domain.model.BaseDO
 import com.alphaz.infrastructure.domain.filter.annotation.DataState
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.service.common.LocalizationService
 import com.alphaz.infrastructure.persistence.jpa.BaseRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 
 /**
  *@Author: c0der
@@ -24,19 +27,11 @@ abstract class DomainServiceImpl<T : BaseDO<T, ID>, ID, REPO : BaseRepository<T,
         this.repository.remove(t);
     }
 
-    override fun save(t: T) {
+    override fun saveOrUpdate(t: T) {
         this.repository.save(t)
     }
 
-    override fun findAll(): MutableList<T> {
-        return this.repository.findAll();
-    }
-
-    override fun findById(t: ID): T? {
-        val entity = this.repository.findById(t);
-        if (entity.isPresent) {
-            return entity.get();
-        }
-        return null;
+   override fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T> {
+        return this.repository.getPageList(specification, pageable)
     }
 }

@@ -3,7 +3,7 @@ package com.alphaz.core.authorization
 import com.alphaz.core.authorization.user.User
 import com.alphaz.core.authorization.user.UserPolicy
 import com.alphaz.core.authorization.user.UserRepository
-import com.alphaz.infrastructure.domain.service.DomainServiceImpl
+import com.alphaz.infrastructure.domain.service.base.DomainServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,7 +21,7 @@ open class SignUpService : DomainServiceImpl<User, Long, UserRepository>() {
     @Autowired
     private lateinit var userPolicy: UserPolicy;
 
-    open fun register(user: User): User {
+    open fun signUp(user: User): User {
         userPolicy.userSignInPolicy(user);
         return this.repository.save(user);
     }

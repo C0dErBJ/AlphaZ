@@ -1,13 +1,13 @@
-package com.alphaz.core.config
+package com.alphaz.application.config
 
 import com.alphaz.core.authorization.user.UserPolicy
 import com.alphaz.core.authorization.user.UserRepository
 import com.alphaz.core.authorization.user.UserService
 import com.alphaz.core.authorization.user.UserSignInRecord
 import com.alphaz.core.localization.LocalizationService
-import com.alphaz.infrastructure.constant.Status
-import com.alphaz.infrastructure.domain.model.ErrorInfo
-import com.alphaz.infrastructure.domain.model.ResponseModel
+import com.alphaz.infrastructure.constant.enums.Status
+import com.alphaz.infrastructure.domain.model.common.ErrorInfo
+import com.alphaz.infrastructure.domain.model.common.ResponseModel
 import com.alphaz.infrastructure.util.HttpHelper
 import com.alphaz.infrastructure.util.JsonHelper
 import org.greenrobot.eventbus.EventBus
@@ -24,8 +24,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
 
 /**
@@ -41,7 +39,7 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var userService: UserService
     @Autowired
-    private lateinit var userPolicy: UserPolicy;
+    private lateinit var userPolicy: UserPolicy
     @Autowired
     private lateinit var userRepository: UserRepository;
     @Autowired
@@ -56,9 +54,9 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         const val defaultContentType = "application/json;charset=utf-8"
     }
 
-    open override fun configure(web: WebSecurity?) {
+    open override fun configure(web: WebSecurity) {
         //此处配置静态资源文件过滤
-        web!!.ignoring().antMatchers(
+        web.ignoring().antMatchers(
                 "/favicon.ico",
                 "/system/**",
                 "/error",
@@ -73,7 +71,7 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Throws(Exception::class)
-    open override fun configure(http: HttpSecurity) {
+    override fun configure(http: HttpSecurity) {
         // 此处配置服务资源过滤，基于权限
         // Warn 此处貌似有个坑，禁止匿名访问后会影响到formlogin使之不能正常使用，会影响到不能获取principle，是不是安全的机制还未确定
         http.formLogin().loginPage(loginUrl)
@@ -129,7 +127,7 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     } else {
                         response.sendRedirect(loginUrl)
                     }
-                }.accessDeniedHandler { request, response, accessDeniedException ->
+                }.accessDeniedHandler { _, response, _ ->
                     response.contentType = defaultContentType
                     response.writer.write(JsonHelper.toString(ResponseModel<Any>(ErrorInfo(l.getMessage("accessDenied")))))
                 }.and()
@@ -138,21 +136,16 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .disable()
     }
 
-    @Bean
-    open fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
 
-
-    @Autowired
     @Throws(Exception::class)
-    open override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth!!.userDetailsService<UserService>(userService).passwordEncoder(passwordEncoder())
+    override fun configure(@Autowired auth: AuthenticationManagerBuilder) {
+        auth.userDetailsService<UserService>(userService).passwordEncoder(userPolicy.passwordEncoder)
     }
 
     @Bean
     @Throws(Exception::class)
-    open override fun authenticationManagerBean(): AuthenticationManager {
+    override fun authenticationManagerBean(): AuthenticationManager {
         return super.authenticationManagerBean()
     }
+
 }

@@ -1,6 +1,6 @@
 package com.alphaz.core.authorization.role
 
-import com.alphaz.infrastructure.domain.service.DomainServiceImpl
+import com.alphaz.infrastructure.domain.service.base.DomainServiceImpl
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.annotation.Validated

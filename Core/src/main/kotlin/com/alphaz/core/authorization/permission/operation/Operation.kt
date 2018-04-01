@@ -1,7 +1,7 @@
 package com.alphaz.core.authorization.permission.operation
 
 import com.alphaz.core.authorization.permission.Permission
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import javax.persistence.*
 
 /**

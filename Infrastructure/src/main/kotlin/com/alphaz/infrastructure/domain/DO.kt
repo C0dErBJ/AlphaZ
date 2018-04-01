@@ -1,11 +1,7 @@
 package com.alphaz.infrastructure.domain
 
-import com.alphaz.infrastructure.constant.State
+import com.alphaz.infrastructure.constant.enums.State
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
 
 /**
  *@Author: c0der
@@ -29,19 +25,19 @@ interface DO<C, ID> {
     /**
      * 创建时间
      */
-    var createTime: LocalDateTime
+    var createdAt: LocalDateTime
     /**
      * 更新时间
      */
-    var updateTime: LocalDateTime?
+    var updateAt: LocalDateTime?
     /**
      * 创建人
      */
-    var createBy: ID?
+    var createdBy: ID?
     /**
      * 更新人
      */
-    var updateBy: ID?
+    var updatedBy: ID?
 
     var owner: ID?
 

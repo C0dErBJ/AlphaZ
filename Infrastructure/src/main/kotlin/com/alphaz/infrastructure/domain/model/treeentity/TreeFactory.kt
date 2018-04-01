@@ -7,8 +7,8 @@ package com.alphaz.infrastructure.domain.model.treeentity
  *@Description:
  */
 class TreeFactory<C : BaseTreeEntity<*>, T : TreeValue<C>> {
-    fun MutableSet<C>.toTreeValue(): TreeValue<C> {
-        val sortedTreeList = this.sortedBy { a -> a.layer }
+    fun toTreeValue(list:MutableSet<C>): TreeValue<C> {
+        val sortedTreeList = list.sortedBy { a -> a.layer }
         val tree = TreeValue<C>()
         for (index in sortedTreeList) {
             if (index.parentId == null) {
@@ -19,4 +19,5 @@ class TreeFactory<C : BaseTreeEntity<*>, T : TreeValue<C>> {
         }
         return tree;
     }
+
 }

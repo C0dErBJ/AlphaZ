@@ -1,20 +1,9 @@
 version '1.0-SNAPSHOT'
-buildscript {
-    repositories {
-        maven {
-            url "http://122.112.234.252:8888/nexus/content/groups/public/"
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.1"
-    }
-}
+
 apply plugin: 'kotlin-kapt'
 apply plugin: 'at.comm_unity.gradle.plugins.jpamodelgen'
+//apply plugin: "org.flywaydb.flyway"
+
 bootJar {
     enabled = false
 }
@@ -33,20 +22,11 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-security",
             "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE",
             "org.springframework.security:spring-security-jwt:${springSecurityJwt}",
-//            "io.dubbo.springboot:spring-boot-starter-dubbo:${dubboVersion}",
 
 //            "org.flywaydb:flyway-core:${flywayVersion}"
     )
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
-}
-kapt {
-    javacOptions {
-        option("-proc:only")
-//        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
-
-    }
-
 }
 jpaModelgen {
     jpaModelgenSourcesDir = "build/redirect/to/nowhere"
@@ -58,6 +38,15 @@ idea {
         generatedSourceDirs += kaptMain
     }
 }
+
+//具体查看
+//https://flywaydb.org/documentation/gradle/
+//flyway {
+//    url = 'jdbc:mysql://localhost:3306/alphaz?autoReconnect=true&amp;useUnicode=true'
+//    user = 'root'
+//    password = '123456'
+//    schemas = ['alphaz']
+//}
 
 
 

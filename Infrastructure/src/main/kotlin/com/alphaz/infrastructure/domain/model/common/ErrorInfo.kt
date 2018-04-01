@@ -1,4 +1,4 @@
-package com.alphaz.infrastructure.domain.model
+package com.alphaz.infrastructure.domain.model.common
 
 /**
  *@Author: c0der

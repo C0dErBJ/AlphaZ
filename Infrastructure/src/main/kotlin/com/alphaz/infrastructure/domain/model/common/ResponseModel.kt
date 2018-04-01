@@ -1,6 +1,6 @@
-package com.alphaz.infrastructure.domain.model
+package com.alphaz.infrastructure.domain.model.common
 
-import com.alphaz.infrastructure.constant.Status
+import com.alphaz.infrastructure.constant.enums.Status
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 

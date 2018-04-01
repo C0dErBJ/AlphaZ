@@ -1,7 +1,10 @@
 package com.alphaz.infrastructure.persistence.jpa
 
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.querydsl.jpa.hibernate.HibernateQueryFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean
 
@@ -17,5 +20,7 @@ interface BaseRepository<T : BaseDO<T, ID>, ID> : JpaRepository<T, ID> {
     fun removeById(id: ID);
 
     fun remove(entity: T);
+
+    fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T>
 
 }

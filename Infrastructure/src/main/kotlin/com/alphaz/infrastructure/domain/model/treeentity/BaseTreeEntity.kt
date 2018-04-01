@@ -1,6 +1,6 @@
 package com.alphaz.infrastructure.domain.model.treeentity
 
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.DO
 import javax.persistence.*
 

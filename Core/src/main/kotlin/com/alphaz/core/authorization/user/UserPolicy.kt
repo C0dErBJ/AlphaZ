@@ -3,12 +3,11 @@ package com.alphaz.core.authorization.user
 import com.alphaz.core.localization.LocalizationService
 import com.alphaz.infrastructure.domain.Policy
 import com.alphaz.infrastructure.exception.BusinessErrorException
-import org.apache.commons.codec.binary.Hex
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
-import java.security.MessageDigest
-import javax.servlet.*
 
 /**
  *@Author: c0der
@@ -22,8 +21,8 @@ open class UserPolicy : Policy<User> {
     @Autowired
     private lateinit var userRepository: UserRepository
 
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
+    val passwordEncoder: PasswordEncoder
+        get() = BCryptPasswordEncoder()
 
 
     open fun passwordStrength(t: User): Boolean {

@@ -1,4 +1,4 @@
-package com.alphaz.core.config
+package com.alphaz.application.config
 
 import com.alphaz.core.authorization.UserSignInEvent
 import org.greenrobot.eventbus.EventBus

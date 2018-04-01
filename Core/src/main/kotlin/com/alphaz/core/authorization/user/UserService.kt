@@ -1,15 +1,12 @@
 package com.alphaz.core.authorization.user
 
 import com.alphaz.core.authorization.permission.Permission
-import com.alphaz.core.localization.LocalizationService
-import com.alphaz.infrastructure.domain.service.DomainServiceImpl
+import com.alphaz.infrastructure.domain.service.base.DomainServiceImpl
 import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.annotation.Validated
@@ -28,7 +25,8 @@ open class UserService : DomainServiceImpl<User, Long, UserRepository>(), UserDe
 
     override fun loadUserByUsername(username: String?): UserDetails? {
         assert(username != null);
-        val matchedUser = repository.findFirstByUsername(username!!) ?: throw UsernameNotFoundException("UserNotFound")
+        val matchedUser = repository.findFirstByUsername(username!!)
+                ?: throw UsernameNotFoundException(l.getMessage("UserNotFound"))
         return org.springframework.security.core.userdetails.User(matchedUser.username,
                 matchedUser.password, matchedUser.isEnabled,
                 matchedUser.isAccountNonExpired,
@@ -66,4 +64,5 @@ open class UserService : DomainServiceImpl<User, Long, UserRepository>(), UserDe
         }
         return permissions.distinctBy { a -> a.id }.toMutableSet();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.alphaz.infrastructure.constant
+package com.alphaz.infrastructure.constant.enums
 
 /**
  *@Author: c0der

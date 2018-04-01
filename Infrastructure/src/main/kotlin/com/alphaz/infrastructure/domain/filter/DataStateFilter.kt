@@ -1,7 +1,7 @@
 package com.alphaz.infrastructure.domain.filter
 
 import com.alphaz.infrastructure.domain.filter.annotation.DataState
-import com.alphaz.infrastructure.constant.State
+import com.alphaz.infrastructure.constant.enums.State
 import org.aspectj.lang.annotation.Aspect
 import org.springframework.stereotype.Component
 import org.aspectj.lang.ProceedingJoinPoint
@@ -27,7 +27,7 @@ open class DataStateFilter {
     private val entityManager: EntityManager? = null
 
 
-    @Pointcut("execution(* com.alphaz.infrastructure.domain.service.DomainService+.*(..))")
+    @Pointcut("execution(* com.alphaz.infrastructure.domain.service.base.DomainService+.*(..))")
     fun baseRepository() {
 
     }

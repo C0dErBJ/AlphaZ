@@ -1,4 +1,4 @@
-package com.alphaz.core.config
+package com.alphaz.application.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

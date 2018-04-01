@@ -1,8 +1,9 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.31'
+        kotlinVersion = '1.2.30'
         bootGralde = '2.0.0.RELEASE'
         flyway = '5.0.7'
+        jpaModelGenVersion = '1.1.1'
     }
     repositories {
         maven {
@@ -18,7 +19,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${bootGralde}"
         classpath "gradle.plugin.com.boxfuse.client:gradle-plugin-publishing:${flyway}"
-        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.1"
+        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:${jpaModelGenVersion}"
     }
 }
 
@@ -38,7 +39,8 @@ subprojects {
         flywayVersion = '5.0.7'
         neohtmlVersion = '1.9.22'
         junitVersion = "4.12"
-        eventBus = "3.1.1"
+        eventBusVersion = "3.1.1"
+        mapStructVersion="1.2.0.Final"
 
     }
 

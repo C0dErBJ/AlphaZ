@@ -1,9 +1,12 @@
-package com.alphaz.infrastructure.domain.service
+package com.alphaz.infrastructure.domain.service.base
 
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.service.common.LocalizationService
 import com.alphaz.infrastructure.persistence.jpa.BaseRepository
 import org.slf4j.Logger
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 
 /**
  *@Author: c0der
@@ -17,11 +20,9 @@ interface DomainService<T : BaseDO<T, ID>, ID, REPO : BaseRepository<T, ID>> {
 
     var repository: REPO
 
-    fun save(t: T);
+    fun saveOrUpdate(t: T);
 
     fun delete(t: T);
 
-    fun findAll(): MutableList<T>;
-
-    fun findById(t: ID): T?;
+    fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T>;
 }

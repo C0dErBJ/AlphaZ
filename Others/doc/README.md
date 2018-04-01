@@ -78,7 +78,7 @@
 在对应需要生成war包的项目build.gradle文件中添加“apply plugin: 'war'”代码，则在打包时会同时生成war包
 
 ## 运行
-将jar部署到服务器，通过命令行“java -jar  ***.jar --spring.profiles.active=? --server.port=9090”，问号用（dev,test,prod）替代，指向具体使用哪个环境运行。（war部署直接发布在tomcat或其他应用服务器中）
+将jar部署到服务器，通过命令行“java -jar  ***.jar --spring.profiles.active=? --server.port=9090”，问号用（dev,UserTest,prod）替代，指向具体使用哪个环境运行。（war部署直接发布在tomcat或其他应用服务器中）
 
 # 项目依赖
 

@@ -1,9 +1,13 @@
 package com.alphaz.infrastructure.persistence.jpa
 
-import com.alphaz.infrastructure.constant.State
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.constant.enums.State
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.querydsl.jpa.hibernate.HibernateQueryFactory
 import org.hibernate.Session
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.jpa.repository.support.JpaEntityInformation
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository
 import javax.persistence.EntityManager
@@ -38,7 +42,18 @@ open class BaseRepositoryImpl<T : BaseDO<T, ID>, ID>(jpaEntityInformation: JpaEn
         super.save(entity);
     }
 
-    fun a() {
+    /**
+     * 分页查询
+     */
+    override fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T> {
+        if (specification == null) {
+            return super.findAll(pageable)
+        }
+        val result =
+                super.getQuery(specification, pageable).resultList;
+        val count = super.count(specification)
+        return PageImpl<T>(result, pageable, count)
+
     }
 
 

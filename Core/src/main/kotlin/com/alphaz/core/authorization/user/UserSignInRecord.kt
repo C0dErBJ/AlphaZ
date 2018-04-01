@@ -1,6 +1,6 @@
 package com.alphaz.core.authorization.user
 
-import com.alphaz.infrastructure.domain.model.BaseDO
+import com.alphaz.infrastructure.domain.model.base.BaseDO
 import java.time.LocalDateTime
 import javax.persistence.*
 import javax.validation.constraints.NotNull

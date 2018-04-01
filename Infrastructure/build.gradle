@@ -1,20 +1,5 @@
 version '1.0-SNAPSHOT'
 
-buildscript {
-    repositories {
-        maven {
-            url "http://122.112.234.252:8888/nexus/content/groups/public/"
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.1"
-    }
-}
-
 bootJar {
     enabled = false
 }
@@ -41,19 +26,12 @@ dependencies {
             "org.hibernate.validator:hibernate-validator"
 
     )
-    compile 'org.greenrobot:eventbus:3.1.1'
+    compile "org.greenrobot:eventbus:${eventBusVersion}"
     compile("org.springframework.boot:spring-boot-starter-web")
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
 }
-kapt {
-    javacOptions {
-        option("-proc:only")
-//        option("-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor")
 
-    }
-
-}
 jpaModelgen {
     jpaModelgenSourcesDir = "build/redirect/to/nowhere"
 }

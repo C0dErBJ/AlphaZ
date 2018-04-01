@@ -1,6 +1,6 @@
-package com.alphaz.infrastructure.domain.model
+package com.alphaz.infrastructure.domain.model.base
 
-import com.alphaz.infrastructure.constant.State
+import com.alphaz.infrastructure.constant.enums.State
 import com.alphaz.infrastructure.domain.DO
 import org.hibernate.annotations.Filter
 import org.hibernate.annotations.FilterDef
@@ -38,22 +38,22 @@ abstract class BaseDO<C : DO<C, ID>, ID> : DO<C, ID> {
     /**
      * 创建时间
      */
-    @Column(name = "create_time", columnDefinition = "datetime default CURRENT_TIMESTAMP")
-    override var createTime: LocalDateTime = LocalDateTime.now()
+    @Column(name = "create_at", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+    override var createdAt: LocalDateTime = LocalDateTime.now()
     /**
      * 更新时间
      */
-    @Column(name = "update_time", columnDefinition = "datetime default CURRENT_TIMESTAMP")
-    override var updateTime: LocalDateTime? = null
+    @Column(name = "update_at", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+    override var updateAt: LocalDateTime? = null
 
     /**
      * 创建人
      */
-    override var createBy: ID? = null
+    override var createdBy: ID? = null
     /**
      * 更新人
      */
-    override var updateBy: ID? = null
+    override var updatedBy: ID? = null
 
     override var owner: ID? = null
 

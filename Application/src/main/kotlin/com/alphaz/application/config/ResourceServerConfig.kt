@@ -1,4 +1,4 @@
-package com.alphaz.core.config
+package com.alphaz.application.config
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
