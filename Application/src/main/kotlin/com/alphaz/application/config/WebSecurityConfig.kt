@@ -58,11 +58,9 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         //此处配置静态资源文件过滤
         web.ignoring().antMatchers(
                 "/favicon.ico",
-                "/system/**",
                 "/error",
                 "/image",
                 "/resources/**",
-                "/script/**",
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/swagger-resources/**",

@@ -1,6 +1,7 @@
 package com.alphaz.application.authorization.user.dto
 
 import com.alphaz.core.authorization.role.Role
+import com.alphaz.infrastructure.application.dto.BaseDto
 import java.time.LocalDateTime
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
@@ -28,10 +29,10 @@ data class UserDto(@field:Size(max = 256)
                    var isAccountNonLocked: Boolean,
                    var isCredentialsNonExpired: Boolean,
                    var resetCode: String?,
-                   var isTwoFactorEnabled: Boolean,
-                   var roles: MutableSet<Role>?) {
+                   var isTwoFactorEnabled: Boolean
+                  ) : BaseDto() {
     constructor() : this(null, null, null,
             null, null, 0, true,
-            true, true, true, null,true,null)
+            true, true, true, null, true)
 
 }

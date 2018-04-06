@@ -1,7 +1,8 @@
-package com.alphaz.application
+package com.alphaz.application.authorization.user.dto
 
 import com.alphaz.application.authorization.user.dto.UserDto
 import com.alphaz.core.authorization.user.User
+import com.alphaz.infrastructure.application.BaseMapper
 import org.mapstruct.Mapper
 
 /**
@@ -10,8 +11,6 @@ import org.mapstruct.Mapper
  *@Description:
  */
 @Mapper
-interface CustomMapper {
-    fun toUserDto(user: User): UserDto
+interface UserMapper : BaseMapper<UserDto, User> {
 
-    fun toUserDtos(users: List<User>): List<UserDto>
 }

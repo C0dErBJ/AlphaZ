@@ -27,7 +27,8 @@ dependencies {
 
     )
     compile "org.greenrobot:eventbus:${eventBusVersion}"
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-web")//normal web
+    compile("org.springframework.boot:spring-boot-starter-webflux")//reactive
     compile "com.querydsl:querydsl-apt:${querydslVersion}"
     kapt "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
 }

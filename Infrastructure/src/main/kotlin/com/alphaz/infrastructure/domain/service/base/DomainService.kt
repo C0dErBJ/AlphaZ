@@ -20,9 +20,24 @@ interface DomainService<T : BaseDO<T, ID>, ID, REPO : BaseRepository<T, ID>> {
 
     var repository: REPO
 
-    fun saveOrUpdate(t: T);
+    fun createOrUpdate(t: T): T;
+
+    fun createOrUpdate(list: List<T>): MutableList<T>;
+
+    fun createOrUpdateFlush(t: T): T;
+
+    fun createOrUpdateFlush(list: List<T>): MutableList<T>;
+
+    fun findById(id: ID): T?;
+
+    fun findAll(specification: Specification<T>): MutableList<T>;
+
+    fun getListByPage(specification: Specification<T>?, pageable: Pageable): Page<T>;
 
     fun delete(t: T);
 
-    fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T>;
+    fun deleteById(t: ID);
+
+    fun deleteBySpecification(specification: Specification<T>);
+
 }

@@ -56,5 +56,8 @@ open class BaseRepositoryImpl<T : BaseDO<T, ID>, ID>(jpaEntityInformation: JpaEn
 
     }
 
+    override fun findBySpecification(specification: Specification<T>): MutableList<T> {
+        return this.findAll(specification)
+    }
 
 }

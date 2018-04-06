@@ -1,6 +1,6 @@
 package com.alphaz.application.config
 
-import com.alphaz.application.CustomMapper
+import com.alphaz.application.authorization.user.dto.UserMapper
 import org.mapstruct.factory.Mappers
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 open class ApplicationConfig {
     @Bean
-    open fun mapper(): CustomMapper {
-        return Mappers.getMapper(CustomMapper::class.java)
+    open fun userMapper(): UserMapper {
+        return Mappers.getMapper(UserMapper::class.java)
     }
 
 }

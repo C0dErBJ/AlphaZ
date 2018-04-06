@@ -23,15 +23,55 @@ abstract class DomainServiceImpl<T : BaseDO<T, ID>, ID, REPO : BaseRepository<T,
     @Autowired
     override lateinit var l: LocalizationService;
 
+    override fun createOrUpdate(t: T): T {
+        return this.repository.save(t)
+    }
+
+    override fun createOrUpdate(list: List<T>): MutableList<T> {
+        return this.repository.saveAll(list);
+    }
+
+    override fun createOrUpdateFlush(t: T): T {
+        return this.repository.saveAndFlush(t);
+    }
+
+    override fun createOrUpdateFlush(list: List<T>): MutableList<T> {
+        val newList = mutableListOf<T>()
+        for (t in list) {
+            newList.add(this.repository.saveAndFlush(t))
+        }
+        return newList;
+    }
+
+    override fun findById(id: ID): T? {
+        if (id == null) {
+            return null;
+        }
+        val result = this.repository.findById(id);
+        return if (result.isPresent) result.get() else null;
+    }
+
+    override fun findAll(specification: Specification<T>): MutableList<T> {
+        return this.repository.findBySpecification(specification)
+    }
+
     override fun delete(t: T) {
         this.repository.remove(t);
     }
 
-    override fun saveOrUpdate(t: T) {
-        this.repository.save(t)
+    override fun deleteById(t: ID) {
+        if (t == null) {
+            return
+        }
+        this.repository.removeById(t)
     }
 
-   override fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T> {
+    override fun deleteBySpecification(specification: Specification<T>) {
+        this.repository.findBySpecification(specification)
+    }
+
+    override fun getListByPage(specification: Specification<T>?, pageable: Pageable): Page<T> {
         return this.repository.getPageList(specification, pageable)
     }
+
 }

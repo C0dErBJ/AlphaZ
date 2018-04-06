@@ -18,7 +18,8 @@ import org.springframework.scheduling.annotation.EnableAsync
 @EnableCaching
 @ComponentScan(basePackages = ["com.alphaz"])
 open class Application{
-     fun main(args: Array<String>) {
-        SpringApplication.run(Application::class.java, *args)
-    }
+}
+
+fun main(args: Array<String>) {
+    SpringApplication.run(Application::class.java, *args)
 }

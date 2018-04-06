@@ -23,4 +23,6 @@ interface BaseRepository<T : BaseDO<T, ID>, ID> : JpaRepository<T, ID> {
 
     fun getPageList(specification: Specification<T>?, pageable: Pageable): Page<T>
 
+    fun findBySpecification(specification: Specification<T>): MutableList<T>;
+
 }
