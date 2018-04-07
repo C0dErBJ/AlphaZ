@@ -1,6 +1,6 @@
 package com.alphaz.infrastructure.domain.service.base
 
-import com.alphaz.infrastructure.domain.filter.annotation.DataState
+import com.alphaz.infrastructure.domain.annotation.DataState
 import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.service.common.LocalizationService
 import com.alphaz.infrastructure.persistence.jpa.BaseRepository

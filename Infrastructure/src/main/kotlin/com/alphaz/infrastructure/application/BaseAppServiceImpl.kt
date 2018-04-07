@@ -4,6 +4,7 @@ import com.alphaz.infrastructure.application.dto.BaseDto
 import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.service.base.DomainServiceImpl
 import com.alphaz.infrastructure.domain.service.common.LocalizationService
+import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -15,13 +16,13 @@ import org.springframework.data.jpa.domain.Specification
  *@Date: 下午2:38 2018/4/1
  *@Description:
  */
-open class BaseAppServiceImpl<D : BaseDto, T : BaseDO<T, ID>, ID, DomainService : DomainServiceImpl<T, ID, *>> : BaseAppService<D, T, ID, DomainService> {
+open class BaseAppServiceImpl<D : BaseDto, T : BaseDO<T, ID>, ID, DomainService : DomainServiceImpl<T, ID, *>, Mapper : BaseMapper<D, T>> : BaseAppService<D, T, ID, DomainService, Mapper> {
     @Autowired
     override lateinit var l: LocalizationService;
     @Autowired
     override lateinit var domainService: DomainService;
     @Autowired
-    private lateinit var mapper: BaseMapper<D, T>;
+    override lateinit var mapper: Mapper;
 
 
     override fun createOrUpdate(t: List<D>): MutableList<D> {
@@ -30,6 +31,7 @@ open class BaseAppServiceImpl<D : BaseDto, T : BaseDO<T, ID>, ID, DomainService 
     }
 
     override fun createOrUpdate(t: D): D {
+        throw BusinessErrorException(l.getMessage("fd"))
         val result = domainService.createOrUpdate(mapper.toDo(t));
         return mapper.toDto(result);
     }

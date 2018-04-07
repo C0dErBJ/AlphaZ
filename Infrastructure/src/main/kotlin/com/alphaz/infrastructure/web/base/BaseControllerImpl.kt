@@ -1,4 +1,4 @@
-package com.alphaz.infrastructure.web
+package com.alphaz.infrastructure.web.base
 
 import com.alphaz.infrastructure.application.BaseAppService
 import com.alphaz.infrastructure.application.dto.BaseDto
@@ -16,38 +16,36 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 /**
  *@Author: c0der
- *@Date: 下午3:11 2018/4/6
+ *@Date: 上午1:35 2018/4/7
  *@Description:
  */
 @RequestMapping("base")
-open class BaseController<D : BaseDto, T : BaseDO<T, ID>, ID, AppService : BaseAppService<D, T, ID, *>> {
+open class BaseControllerImpl<D : BaseDto, T : BaseDO<T, ID>, ID, AppService : BaseAppService<D, T, ID, *, *>> : BaseController<D, T, ID, AppService> {
     @Autowired
-    private lateinit var appService: AppService;
+    override lateinit var appService: AppService;
 
     @PostMapping("createbybatch")
-    fun createOrUpdateBatch(t: List<D>): MutableList<D> {
+    override fun createOrUpdateBatch(t: List<D>): MutableList<D> {
         return appService.createOrUpdate(t)
     }
 
     @PostMapping("create")
-    fun createOrUpdate(t: D): D {
+    override fun createOrUpdate(t: D): D {
         return appService.createOrUpdate(t);
     }
 
     @GetMapping("/{id}")
-    fun getDetailById(id: ID): D? {
+    override fun getDetailById(id: ID): D? {
         return appService.getDetailById(id);
     }
 
     @GetMapping("/getlistbypage")
-    fun getListByPage(specification: Specification<T>?, @PageableDefault(sort = [(AppConst.defaltSort)]) pageable: Pageable): Page<D> {
+    override fun getListByPage(specification: Specification<T>?, @PageableDefault(sort = [(AppConst.defaltSort)]) pageable: Pageable): Page<D> {
         return appService.getListByPage(specification, pageable)
     }
 
     @DeleteMapping("/{id}")
-    fun deleteById(id: ID) {
+    override fun deleteById(id: ID) {
         return appService.deleteById(id);
     }
-
-
 }

@@ -13,9 +13,10 @@ import org.springframework.data.jpa.domain.Specification
  *@Date: 下午2:37 2018/4/1
  *@Description:
  */
-interface BaseAppService<D : BaseDto, T : BaseDO<T, ID>, ID, out DS : DomainService<T, ID, *>> {
+interface BaseAppService<D : BaseDto, T : BaseDO<T, ID>, ID, out DS : DomainService<T, ID, *>, out Mapper:BaseMapper<D,T>> {
     val l: LocalizationService
     val domainService: DS
+    val mapper: Mapper
 
     fun createOrUpdate(t: List<D>): MutableList<D>;
     fun createOrUpdate(t: D): D;

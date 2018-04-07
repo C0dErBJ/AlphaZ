@@ -1,14 +1,14 @@
 package com.alphaz.infrastructure.domain.filter
 
-import com.alphaz.infrastructure.domain.filter.annotation.DataState
 import com.alphaz.infrastructure.constant.enums.State
-import org.aspectj.lang.annotation.Aspect
-import org.springframework.stereotype.Component
+import com.alphaz.infrastructure.domain.annotation.DataState
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
+import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Pointcut
 import org.hibernate.Session
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Component
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 
@@ -28,23 +28,23 @@ open class DataStateFilter {
 
 
     @Pointcut("execution(* com.alphaz.infrastructure.domain.service.base.DomainService+.*(..))")
-    fun baseRepository() {
+    open fun baseRepository() {
 
     }
 
     @Pointcut("@within(dataStateClass)")
-    fun stateFilterClass(dataStateClass: DataState) {
+    open fun stateFilterClass(dataStateClass: DataState) {
 
     }
 
     @Pointcut("@annotation(dataStateMethod)")
-    fun stateFilterMethod(dataStateMethod: DataState) {
+    open fun stateFilterMethod(dataStateMethod: DataState) {
 
     }
 
     @Around(value = "stateFilterClass(dataStateClass) && baseRepository()")
     @Throws(Throwable::class)
-    fun handleClassFilter(joinPoint: ProceedingJoinPoint, dataStateClass: DataState): Any? {
+    open fun handleClassFilter(joinPoint: ProceedingJoinPoint, dataStateClass: DataState): Any? {
         log.info("start stateFilter Class")
         if (!dataStateClass.enable) {
             log.warn("ignore stateFilter Class")
@@ -75,7 +75,7 @@ open class DataStateFilter {
 
     @Around(value = "stateFilterMethod(dataStateMethod) && baseRepository()")
     @Throws(Throwable::class)
-    fun handleMethodFilter(joinPoint: ProceedingJoinPoint, dataStateMethod: DataState): Any? {
+    open fun handleMethodFilter(joinPoint: ProceedingJoinPoint, dataStateMethod: DataState): Any? {
         log.info("start stateFilter Method")
         if (!dataStateMethod.enable) {
             log.warn("ignore stateFilter Method")

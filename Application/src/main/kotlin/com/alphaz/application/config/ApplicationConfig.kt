@@ -1,6 +1,8 @@
 package com.alphaz.application.config
 
+import com.alphaz.application.authorization.user.dto.UserDto
 import com.alphaz.application.authorization.user.dto.UserMapper
+import com.alphaz.core.authorization.user.User
 import org.mapstruct.factory.Mappers
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

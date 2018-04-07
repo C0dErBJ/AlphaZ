@@ -54,7 +54,7 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         const val defaultContentType = "application/json;charset=utf-8"
     }
 
-    open override fun configure(web: WebSecurity) {
+     override fun configure(web: WebSecurity) {
         //此处配置静态资源文件过滤
         web.ignoring().antMatchers(
                 "/favicon.ico",
@@ -64,7 +64,11 @@ open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/swagger-resources/**",
-                "/webjars/**"
+                "/webjars/**",
+                "/swagger-resources",
+                "/configuration/security",
+                "/configuration/ui"
+
         )
     }
 

@@ -1,4 +1,4 @@
-package com.alphaz.infrastructure.domain.filter.annotation
+package com.alphaz.infrastructure.domain.annotation
 
 import java.lang.annotation.Inherited
 
