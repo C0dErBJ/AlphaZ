@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping
  *@Date: 下午3:11 2018/4/6
  *@Description:
  */
-interface BaseController<D : BaseDto, T : BaseDO<T, ID>, ID, out AppService : BaseAppService<D, T, ID, *, *>> {
+interface BaseController<D : BaseDto<ID>, T : BaseDO<T, ID>, ID, out AppService : BaseAppService<D, T, ID, *, *>> {
     val appService: AppService;
 
-    fun createOrUpdateBatch(t: List<D>): MutableList<D>
-    fun createOrUpdate(t: D): D
+    fun createBatch(t: List<D>): MutableList<D>
+    fun create(t: D): D
+    fun update(t:D):D
     fun getDetailById(id: ID): D?
     fun getListByPage(specification: Specification<T>?, @PageableDefault(sort = [(AppConst.defaltSort)]) pageable: Pageable): Page<D>
     fun deleteById(id: ID)

@@ -5,6 +5,7 @@ package com.alphaz.infrastructure.application.dto
  *@Date: 下午4:04 2018/4/6
  *@Description:
  */
-abstract class BaseDto {
+abstract class BaseDto<ID> {
 
+    val id: ID? = null
 }

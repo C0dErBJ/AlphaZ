@@ -8,7 +8,7 @@ import com.alphaz.infrastructure.domain.model.base.BaseDO
  *@Date: 下午4:15 2018/4/6
  *@Description:
  */
-interface BaseMapper<DTO : BaseDto, T : BaseDO<*, *>> {
+interface BaseMapper<DTO : BaseDto<*>, T : BaseDO<*, *>> {
     fun toDo(dto: DTO): T
     fun toDos(dto: List<DTO>): List<T>
     fun toDto(t: T): DTO

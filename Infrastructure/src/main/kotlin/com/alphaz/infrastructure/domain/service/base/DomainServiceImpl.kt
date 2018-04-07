@@ -3,6 +3,7 @@ package com.alphaz.infrastructure.domain.service.base
 import com.alphaz.infrastructure.domain.annotation.DataState
 import com.alphaz.infrastructure.domain.model.base.BaseDO
 import com.alphaz.infrastructure.domain.service.common.LocalizationService
+import com.alphaz.infrastructure.exception.BusinessErrorException
 import com.alphaz.infrastructure.persistence.jpa.BaseRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -45,7 +46,7 @@ abstract class DomainServiceImpl<T : BaseDO<T, ID>, ID, REPO : BaseRepository<T,
 
     override fun findById(id: ID): T? {
         if (id == null) {
-            return null;
+            throw BusinessErrorException(l.getMessage("IdMustNotBeNull"))
         }
         val result = this.repository.findById(id);
         return if (result.isPresent) result.get() else null;

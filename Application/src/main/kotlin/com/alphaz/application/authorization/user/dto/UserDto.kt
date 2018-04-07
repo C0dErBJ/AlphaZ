@@ -27,7 +27,7 @@ data class UserDto(@field:Size(max = 256)
                    var isCredentialsNonExpired: Boolean?,
                    var resetCode: String?,
                    var isTwoFactorEnabled: Boolean?
-) : BaseDto() {
+) : BaseDto<Long>() {
     constructor() : this(null, null,
             null, null,
             null, null, null, null, null)

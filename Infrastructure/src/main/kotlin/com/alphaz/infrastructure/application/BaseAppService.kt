@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.Specification
  *@Date: 下午2:37 2018/4/1
  *@Description:
  */
-interface BaseAppService<D : BaseDto, T : BaseDO<T, ID>, ID, out DS : DomainService<T, ID, *>, out Mapper:BaseMapper<D,T>> {
+interface BaseAppService<D : BaseDto<ID>, T : BaseDO<T, ID>, ID, out DS : DomainService<T, ID, *>, out Mapper:BaseMapper<D,T>> {
     val l: LocalizationService
     val domainService: DS
     val mapper: Mapper

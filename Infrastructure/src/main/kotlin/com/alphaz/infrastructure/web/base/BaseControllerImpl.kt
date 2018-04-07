@@ -4,15 +4,13 @@ import com.alphaz.infrastructure.application.BaseAppService
 import com.alphaz.infrastructure.application.dto.BaseDto
 import com.alphaz.infrastructure.constant.AppConst
 import com.alphaz.infrastructure.domain.model.base.BaseDO
+import com.alphaz.infrastructure.exception.BusinessErrorException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.web.PageableDefault
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 /**
  *@Author: c0der
@@ -20,17 +18,28 @@ import org.springframework.web.bind.annotation.RequestMapping
  *@Description:
  */
 @RequestMapping("base")
-open class BaseControllerImpl<D : BaseDto, T : BaseDO<T, ID>, ID, AppService : BaseAppService<D, T, ID, *, *>> : BaseController<D, T, ID, AppService> {
+open class BaseControllerImpl<D : BaseDto<ID>, T : BaseDO<T, ID>, ID, AppService : BaseAppService<D, T, ID, *, *>> : BaseController<D, T, ID, AppService> {
     @Autowired
     override lateinit var appService: AppService;
 
+
     @PostMapping("createbybatch")
-    override fun createOrUpdateBatch(t: List<D>): MutableList<D> {
+    override fun createBatch(t: List<D>): MutableList<D> {
         return appService.createOrUpdate(t)
     }
 
     @PostMapping("create")
-    override fun createOrUpdate(t: D): D {
+    override fun create(t: D): D {
+        return appService.createOrUpdate(t);
+    }
+
+    @PutMapping("update")
+    override fun update(t: D): D {
+        if (t.id == null) {
+            throw BusinessErrorException(appService.l.getMessage("IdMustNotBeNull"))
+        }
+        val target = appService.getDetailById(t.id)
+                ?: throw BusinessErrorException(appService.l.getMessage("CouldNotFindTheEntity"))
         return appService.createOrUpdate(t);
     }
 
